@@ -8,27 +8,19 @@ class ListNode {
 var addTwoNumbers = function(l1, l2) {
   var result = [];
   var resultArr = [];
-  if (!l1) {
-    l1 = new ListNode(0)
-  }
-  if (!l2) {
-    l2 = new ListNode(0)
-  }
-  var firstVal = l1.val;
-  var secondVal = l2.val;
-  var sum = firstVal + secondVal;
-  var numArr = String(sum).split("");
-  var lastDigit = Number(numArr[numArr.length - 1]);
-  result.push(lastDigit);
-  var otherDigits = numArr.slice(0, numArr.length - 1).join("");
+  l1 = l1 ? l1 : new ListNode(0)
+  l2 = l2 ? l2 : new ListNode(0)
+  var sum = l1.val + l2.val;
+  result.push(sum % 10);
+  var carry = Math.floor(sum / 10)
   if (l1.next) {
-    l1.next.val = l1.next.val + Number(otherDigits);
+    l1.next.val = l1.next.val + Number(carry);
     resultArr = addTwoNumbers(l1.next, l2.next);
   } else if (l2.next) {
-    l2.next.val = l2.next.val + Number(otherDigits);
+    l2.next.val = l2.next.val + Number(carry);
     resultArr = addTwoNumbers(l1.next, l2.next);
-  } else if (otherDigits){
-    resultArr = Number(otherDigits);
+  } else if (carry) {
+    resultArr = [Number(carry)];
   }
   return result.concat(resultArr);
 };
