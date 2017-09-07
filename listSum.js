@@ -14,13 +14,13 @@ var addTwoNumbers = function(l1, l2) {
   result.push(sum % 10);
   var carry = Math.floor(sum / 10)
   if (l1.next) {
-    l1.next.val = l1.next.val + Number(carry);
+    l1.next.val = l1.next.val + carry;
     resultArr = addTwoNumbers(l1.next, l2.next);
   } else if (l2.next) {
-    l2.next.val = l2.next.val + Number(carry);
+    l2.next.val = l2.next.val + carry;
     resultArr = addTwoNumbers(l1.next, l2.next);
   } else if (carry) {
-    resultArr = [Number(carry)];
+    resultArr = [carry];
   }
   return result.concat(resultArr);
 };
