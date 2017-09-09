@@ -8,9 +8,6 @@
 // Note that the answer must be a substring, "pwke" is a subsequence
 // and not a substring.
 
-// let count = 0;
-// count++
-// console.log(count)
 var lengthOfLongestSubstring = function(s) {
   let longest = '';
   for (let i = 0; i < s.length; i++) {
@@ -26,7 +23,7 @@ var lengthOfLongestSubstring = function(s) {
     }
   }
   return longest.length;
-};
+}
 
 var validSubString = function(sub) {
   let comp = '';
@@ -39,24 +36,6 @@ var validSubString = function(sub) {
   }
   return true;
 }
-
-// var lengthOfLongestSubstring = function(s) {
-//   var currStreak = '';
-//   var longestStreak = 0;
-//   for (var i = 0; i < s.length; i++) {
-//     var char = s[i];
-//     if (currStreak.indexOf(char) === -1) {
-//       currStreak += char;
-//     } else {
-//       currStreak = char;
-//     }
-//     if (currStreak.length > longestStreak) {
-//       longestStreak = currStreak.length
-//     }
-//   }
-//   return longestStreak;
-// }
-
 
 // console.log(lengthOfLongestSubstring('abcabcbb')) // abc
 // console.log(lengthOfLongestSubstring('bbbbb')) // b
