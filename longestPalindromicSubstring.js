@@ -1,3 +1,4 @@
+// Brutish solution
 // function longestPalindrome(s) {
 //   let longest = '';
 //   for (let i = 0; i < s.length; i++) {
@@ -20,6 +21,7 @@
 //   return true;
 // }
 
+// Naive Solution
 function longestPalindrome(s) {
   let start = 0, end = 0;
   for (let i = 0; i < s.length; i++) {
