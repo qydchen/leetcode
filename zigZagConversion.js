@@ -36,3 +36,4 @@ console.log(convert('PAYPALISHIRING', 1));
 console.log(convert('AB', 1));
 console.log(convert('ABCD', 2));
 console.log(convert('AB', 2));
+// O(n) time, O(1) space
