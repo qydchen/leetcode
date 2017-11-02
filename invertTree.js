@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-function invertTree(root) {
+let invertTree = (root) => {
   if (!root) {
     return [];
   }
