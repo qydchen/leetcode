@@ -1,6 +1,6 @@
 // Determine whether an integer is a palindrome. Do this without extra space.
 
-var isPalindrome = function(x) {
+let isPalindrome = function(x) {
   if (x < 0) {
     return false;
   }

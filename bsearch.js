@@ -1,7 +1,7 @@
 function bsearch(array, target) {
-  var mid = Math.floor(array.length / 2);
-  var left = array.slice(0, mid);
-  var right = array.slice(mid + 1);
+  let mid = Math.floor(array.length / 2);
+  let left = array.slice(0, mid);
+  let right = array.slice(mid + 1);
   if (array[mid] === target) {
     return mid;
   } else if (array[mid] > target) {

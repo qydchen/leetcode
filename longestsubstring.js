@@ -8,7 +8,7 @@
 // Note that the answer must be a substring, "pwke" is a subsequence
 // and not a substring.
 
-var lengthOfLongestSubstring = function(s) {
+let lengthOfLongestSubstring = function(s) {
   let longest = '';
   for (let i = 0; i < s.length; i++) {
     for (let j = i + 1 + longest.length; j < s.length + 1; j++) {
@@ -25,7 +25,7 @@ var lengthOfLongestSubstring = function(s) {
   return longest.length;
 }
 
-var validSubString = function(sub) {
+let validSubString = function(sub) {
   let comp = '';
   for (let i = 0; i < sub.length; i++) {
     if (comp.indexOf(sub[i]) === -1) {

@@ -2,19 +2,19 @@ function mergeSort(array) {
   if (array.length <= 1) {
     return array;
   }
-  var mid = Math.floor(array.length / 2);
-  var left = mergeSort(array.slice(0, mid));
-  var right = mergeSort(array.slice(mid));
+  let mid = Math.floor(array.length / 2);
+  let left = mergeSort(array.slice(0, mid));
+  let right = mergeSort(array.slice(mid));
   return merged(left, right);
 }
 
 function merged(left, right) {
-  var sorted = [];
-  var leftdup = left.slice();
-  var rightdup = right.slice();
+  let sorted = [];
+  let leftdup = left.slice();
+  let rightdup = right.slice();
   while (leftdup.length > 0 && rightdup.length > 0) {
-    var firstLeft = leftdup[0];
-    var firstRight = rightdup[0];
+    let firstLeft = leftdup[0];
+    let firstRight = rightdup[0];
     if (firstLeft > firstRight) {
       sorted.push(rightdup.shift());
     } else {

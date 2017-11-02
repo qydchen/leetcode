@@ -28,5 +28,8 @@ rootNode.left = new Node('b');
 rootNode.right = new Node('c');
 rootNode.left.left = new Node('d');
 rootNode.left.right = new Node('e');
+rootNode.left.right.left = new Node('f');
 
-console.log(invertTree(rootNode));
+console.log(rootNode);
+invertTree(rootNode);
+console.log(rootNode);
