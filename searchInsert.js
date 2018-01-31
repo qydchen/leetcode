@@ -20,7 +20,7 @@
 // Output: 0
 
 const searchInsert = function(nums, target) {
-  for (const i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     if (nums[i] === target) {
       return i;
     }
