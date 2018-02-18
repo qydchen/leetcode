@@ -1,4 +1,5 @@
 // invert a singly linked list
+// ES5 function style
 
 function Node(val) {
   this.val = val;
