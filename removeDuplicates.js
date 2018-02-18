@@ -1,6 +1,5 @@
-// Given a shorted array, remove the duplicates in-place such that each
+// Given a sorted array, remove the duplicates in-place such that each
 // element appear only once and return the new length.
-
 
 // O(n) time where n is the length of the array,
 // O(1) space
