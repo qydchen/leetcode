@@ -1,49 +1,61 @@
 // invert a singly linked list
 
-class LinkedNode {
-  constructor(val = null) {
-    this.val = val
-    this.next = null;
+function Node(val) {
+  this.val = val;
+  this.next = null;
+}
+
+function LinkedList(head) {
+  this.head = head;
+
+  this.append = function(node) {
+    this._append(this.head, node);
   }
 
-  link(node) {
-    if (!this.next) {
-      this.next = node;
+  this._append = function(curNode, node) {
+    if (curNode.next === null) {
+      curNode.next = node;
     } else {
-      this.next.link(node);
+      this._append(curNode.next, node);
     }
   }
 
-  print() {
-    this._print(this);
+  this.print = function() {
+    this._print(this.head);
   }
 
-  _print(node) {
-    console.log(node.val);
-    if (node.next) {
+  this._print = function(node) {
+    if (node) {
+      console.log(node.val);
       this._print(node.next);
     }
   }
 
-  invert() {
-    this._invert(this);
+  this.invert = function() {
+    if (this.head === null) {
+      return;
+    }
+    this._invert(this.head, null);
   }
 
-  _invert(node) {
-    console.log(node.val);
-    if (node.next) {
-      let copy = node.next;
-      node.next.next = node;
-      this._invert(copy);
+  this._invert = function(curr, prev) {
+    if (curr.next === null) {
+      this.head = curr;
+      curr.next = prev;
+      return;
     }
+    let {next} = curr;
+    curr.next = prev;
+    this._invert(next, curr);
   }
 
 }
-// a -> b -> c -> d
-// a <- b <- c <- d
-const linkedHead = new LinkedNode('a');
-linkedHead.link(new LinkedNode('b'));
-linkedHead.next.link(new LinkedNode('c'));
-linkedHead.next.next.link(new LinkedNode('d'));
-linkedHead.invert();
-// linkedHead.print();
+
+let list = new LinkedList(new Node('a'));
+list.append(new Node('a'));
+list.append(new Node('b'));
+list.append(new Node('c'));
+list.invert();
+list.print();
+// a a b c
+// c b a a
