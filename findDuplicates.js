@@ -27,7 +27,6 @@ const findDuplicates = function(nums) {
         }
         // console.log('---------')
     }
-    console.log(nums);
     return res;
 };
 
