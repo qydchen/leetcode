@@ -1,8 +1,7 @@
 class Node {
   constructor(val) {
     this.val = val;
-    this.left = null;
-    this.right = null;
+    this.left = this.right = null;
   }
 }
 
@@ -10,16 +9,9 @@ let invertTree = (root) => {
   if (!root) {
     return [];
   }
-  let left = root.left;
-  let right = root.right;
-  root.left = right;
-  root.right = left;
-  if (root.left) {
-    invertTree(root.left);
-  }
-  if (root.right) {
-    invertTree(root.right);
-  }
+  const {left, right} = root;
+  root.left = invertTree(right);
+  root.right = invertTree(left);
   return root;
 }
 
