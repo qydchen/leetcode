@@ -5,7 +5,7 @@ class Node {
   }
 }
 
-let invertTree = (root) => {
+const invertTree = (root) => {
   if (!root) {
     return [];
   }

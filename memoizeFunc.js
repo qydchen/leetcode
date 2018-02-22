@@ -28,7 +28,7 @@ var memory = memoize(addTwo)
 
 
 function addAlot(a,b,c,d,e,f) {
-  var args = Array.prototype.slice.call(arguments, 2);
+  var args = Array.prototype.slice.call(arguments);
   // console.log(arguments);
   // console.log(arguments[3])
   // console.log(arguments.whatever = 'hi')

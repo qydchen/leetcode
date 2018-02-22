@@ -24,5 +24,5 @@ function merged(left, right) {
   return sorted.concat(leftdup, rightdup);
 }
 
-console.log(mergeSort([5,4,3,1,2]));
-console.log(mergeSort([55,123,151,6212,7,14,13,78,1,99]));
+console.log(mergeSort([5, 4, 3, 1, 2]));
+console.log(mergeSort([55, 123, 151, 6212, 7, 14, 13, 78, 1, 99]));
