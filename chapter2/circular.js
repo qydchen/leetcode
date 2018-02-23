@@ -53,8 +53,6 @@ let x = new ListNode('x');
 let y = new ListNode('y');
 let z = new ListNode('z');
 
-// a b c d e f x y z e
-
 a.next = b;
 a.next.next = c;
 a.next.next.next = d;
