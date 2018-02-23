@@ -21,15 +21,26 @@ class MyQueue {
     }
     let dequeued = this.current.peek();
     this.current.pop();
+    while (this.other.size > 0) {
+      this.current.push(this.other.peek());
+      this.other.pop();
+    }
+    return dequeued;
+  }
 
+  peek() {
+    while (this.current.size > 1) {
+      this.other.push(this.current.peek());
+      this.current.pop();
+    }
+    let peek = this.current.peek();
     while (this.other.size > 0) {
       this.current.push(this.other.peek());
       this.other.pop();
     }
 
-    return dequeued;
+    return peek;
   }
-
 
 }
 
@@ -52,4 +63,5 @@ queue.enqueue('b');
 queue.enqueue('c');
 console.log(queue.dequeue());
 console.log(queue.dequeue());
-console.log(queue.dequeue());
+// console.log(queue.dequeue());
+console.log(queue.peek());
