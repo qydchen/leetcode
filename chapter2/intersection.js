@@ -98,3 +98,9 @@ x.next.next.next.next = f;
 // let sizeX = getTailAndSize(x);
 // console.log(sizeA.tail === sizeX.tail)
 console.log(intersection(a, x)); // => ListNode('e')
+
+x.next = y;
+x.next.next = z;
+x.next.next.next = new ListNode('e');
+x.next.next.next.next = new ListNode('f');
+console.log(intersection(a, x)); // => null
