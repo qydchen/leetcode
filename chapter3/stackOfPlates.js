@@ -11,10 +11,10 @@
 
 class SetOfStacks {
   constructor(capacity) {
-     this.set = [];
-     this.capacity = capacity;
-     this.current = -1;
-     this.currentStack = this.set[this.current];
+    this.set = [];
+    this.capacity = capacity;
+    this.current = -1;
+    this.currentStack = this.set[this.current];
   }
 
   push(el) {
@@ -92,16 +92,16 @@ function Stack() {
 // console.log(a.peek());
 
 let set = new SetOfStacks(3);
-set.push('a')
-set.push('b')
-set.push('c')
-set.push('d')
-set.push('e')
-set.push('f')
+set.push('a');
+set.push('b');
+set.push('c');
+set.push('d');
+set.push('e');
+set.push('f');
 // console.log(set.set)
-set.popAt(1)
+set.popAt(1);
 // console.log(set.set)
-set.popAt(1)
-set.popAt(1)
-set.popAt(1)
+set.popAt(1);
+set.popAt(1);
+set.popAt(1);
 // console.log(set.set);
