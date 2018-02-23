@@ -9,7 +9,6 @@ function ListNode(val) {
 // O(1) space
 
 function returnKthToLast(node, k) {
-  let back = node;
   let front = node;
   let space = 0;
   while (space < k) {
@@ -21,9 +20,9 @@ function returnKthToLast(node, k) {
   }
   while (front.next !== null) {
     front = front.next;
-    back = back.next;
+    node = node.next;
   }
-  return back;
+  return node;
 }
 
 let head = new ListNode('a');
@@ -37,3 +36,5 @@ head.next.next.next.next.next.next = new ListNode('c');
 console.log(returnKthToLast(head, 0)); // => ListNode('c')
 console.log(returnKthToLast(head, 1)); // => ListNode('b')
 console.log(returnKthToLast(head, 2)); // => ListNode('b')
+console.log(returnKthToLast(head, 3)); // => ListNode('a')
+console.log(returnKthToLast(null, 2)); // => null
