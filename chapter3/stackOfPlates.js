@@ -1,0 +1,100 @@
+// Imagine a literal stack of plates, if the stack gets too high, it might
+// topple. Therefore, in real life, we would likely start a new stack when
+// the previous stack excees some threshold. Implement a datastructure SetOfStacks
+// that mimics this. SetOfStacks should be composed of several stacks and should
+// create a new stack once the previous one exceeds capacity.
+// SetOfStacks.push() and SetOfStacks.pop() should behave identically to a single stacks
+// (that is, pop() shoudld return the same values as it would if there were just a single stack)
+//
+// FOLLOW UP
+// Implement a function popAt(index) which performs a pop operation on a specific sub-stack.
+
+
+ class SetOfStacks {
+   constructor(capacity) {
+     this.set = [];
+     this.capacity = capacity;
+     this.current = -1;
+     this.currentStack = this.set[this.current];
+   }
+
+   push(el) {
+     if (this.set.length === 0 || this.currentStack.size === this.capacity) {
+       this.addStack();
+     }
+     this.currentStack.push(el);
+   }
+
+   pop() {
+     if (this.set.length === 0) {
+       throw `No More Stacks`;
+     }
+     if (this.currentStack.size <= 1) {
+       this.current--;
+       this.set.pop();
+       this.currentStack = this.set[this.current];
+     } else {
+       this.currentStack.pop();
+     }
+   }
+
+   peek() {
+     return this.currentStack ? this.currentStack.peek() : null;
+   }
+
+   addStack() {
+     this.set.push(new Stack());
+     this.current += 1;
+     this.currentStack = this.set[this.current];
+   }
+
+   popAt(idx) {
+     this.set[idx].pop();
+   }
+
+ }
+
+function Stack() {
+  let stack = []; // make the stack a private variable
+  return (() => { // use IIFE to encapsulate
+    this.size = 0;
+    this.pop = () => {
+      if (stack.pop()) {
+        this.size--;
+      } else {
+        throw `Empty stack`;
+      }
+    };
+    this.push = (el) => {
+      stack.push(el);
+      this.size++;
+    };
+    this.peek = () => stack[stack.length - 1];
+  })()
+}
+
+// let a = new Stack();
+// a.push('a');
+// console.log(a.peek());
+// a.push('b');
+// console.log(a.size);
+// console.log(a.peek());
+// a.pop();
+// console.log(a.size);
+// a.pop();
+// console.log(a.size);
+// console.log(a.peek());
+
+let set = new SetOfStacks(3);
+set.push('a')
+set.push('b')
+set.push('c')
+set.push('d')
+set.push('e')
+set.push('f')
+// console.log(set.set)
+set.popAt(0)
+// console.log(set.set)
+set.popAt(0)
+set.popAt(0)
+console.log(set.set)
