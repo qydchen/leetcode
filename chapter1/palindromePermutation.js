@@ -4,6 +4,7 @@
 // limited to just dictionary words.
 
 // Use a set. The length of the set should be empty or only 1 if a string is a palindrome
+// When the set size is less than or equal to 1, we know that is going to be a palindrome
 function palindromePermutation(str) {
   const standard = str.toLowerCase();
   const set = new Set();
