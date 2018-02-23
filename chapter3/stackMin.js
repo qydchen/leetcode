@@ -12,6 +12,7 @@ class Stack {
     if (this.minimum.peek() === removed) {
       this.minimum.pop();
     }
+    return removed;
   }
 
   push(el) {
@@ -19,6 +20,7 @@ class Stack {
     if (el <= this.minimum.peek() || !this.minimum.peek()) {
       this.minimum.push(el);
     }
+    return true;
   }
 
   peek() {
@@ -40,11 +42,11 @@ class MiniStack {
   }
 
   push(el) {
-    this.stack.push(el)
+    this.stack.push(el);
   }
 
   peek() {
-    return this.stack[this.stack.length - 1];
+    return this.stack[this.stack.length - 1] ? this.stack[this.stack.length - 1] : null;
   }
 }
 
@@ -58,7 +60,12 @@ stack.push(30);
 stack.push(1);
 console.log(stack.min());
 stack.pop();
+console.log(stack.min());
 stack.pop();
+stack.pop();
+console.log(stack.min());
+stack.pop();
+console.log(stack.min());
 stack.pop();
 console.log(stack.min());
 stack.pop();
