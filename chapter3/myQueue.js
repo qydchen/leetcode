@@ -38,7 +38,6 @@ class MyQueue {
       this.current.push(this.other.peek());
       this.other.pop();
     }
-
     return peek;
   }
 
