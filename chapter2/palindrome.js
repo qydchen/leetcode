@@ -16,25 +16,23 @@ class ListNode {
   }
 }
 
-class Stack {
-  constructor() {
-    this.stack = [];
+function Stack() {
+  let stack = []; // make the stack a private variable
+  return (() => { // use IIFE to encapsulate
     this.size = 0;
-  }
-
-  pop() {
-    this.stack.pop();
-    this.size--;
-  }
-
-  push(el) {
-    this.stack.push(el);
-    this.size++;
-  }
-
-  peek() {
-    return this.stack[this.stack.length - 1];
-  }
+    this.pop = () => {
+      if (stack.pop()) {
+        this.size--;
+      } else {
+        return false;
+      }
+    };
+    this.push = (el) => {
+      stack.push(el);
+      this.size++;
+    };
+    this.peek = () => stack[stack.length - 1];
+  })()
 }
 
 function checkPalindrome(node) {
@@ -70,7 +68,7 @@ head.next = new ListNode('b');
 head.next.next = new ListNode('a');
 
 console.log(checkPalindrome(head)); // => true;
-head.print(head);
+// head.print(head);
 
 let head2 = new ListNode('r');
 head2.next = new ListNode('a');
