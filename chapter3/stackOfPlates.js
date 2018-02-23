@@ -9,68 +9,67 @@
 // FOLLOW UP
 // Implement a function popAt(index) which performs a pop operation on a specific sub-stack.
 
-
- class SetOfStacks {
-   constructor(capacity) {
+class SetOfStacks {
+  constructor(capacity) {
      this.set = [];
      this.capacity = capacity;
      this.current = -1;
      this.currentStack = this.set[this.current];
-   }
+  }
 
-   push(el) {
-     if (this.set.length === 0 || this.currentStack.size === this.capacity) {
-       this.addStack();
-     }
-     this.currentStack.push(el);
-   }
+  push(el) {
+    if (this.set.length === 0 || this.currentStack.size === this.capacity) {
+      this.addStack();
+    }
+    this.currentStack.push(el);
+  }
 
-   pop() {
-     if (this.set.length === 0) {
-       throw `No More Stacks`;
-     }
-     if (this.currentStack.size <= 1) {
-       this.current--;
-       this.set.pop();
-       this.currentStack = this.set[this.current];
-     } else {
-       this.currentStack.pop();
-     }
-   }
+  pop() {
+    if (this.set.length === 0) {
+      throw `No More Stacks`;
+    }
+    if (this.currentStack.size <= 1) {
+      this.current--;
+      this.set.pop();
+      this.currentStack = this.set[this.current];
+    } else {
+      this.currentStack.pop();
+    }
+  }
 
-   peek() {
-     return this.currentStack ? this.currentStack.peek() : null;
-   }
+  peek() {
+    return this.currentStack ? this.currentStack.peek() : null;
+  }
 
-   addStack() {
-     this.set.push(new Stack());
-     this.current += 1;
-     this.currentStack = this.set[this.current];
-   }
+  addStack() {
+    this.set.push(new Stack());
+    this.current += 1;
+    this.currentStack = this.set[this.current];
+  }
 
-   popAt(idx) {
-     this.set[idx].pop();
-   }
+  popAt(idx) {
+    this.set[idx].pop();
+  }
 
- }
+}
 
 function Stack() {
-  let stack = []; // make the stack a private variable
-  return (() => { // use IIFE to encapsulate
-    this.size = 0;
-    this.pop = () => {
-      if (stack.pop()) {
-        this.size--;
-      } else {
-        throw `Empty stack`;
-      }
-    };
-    this.push = (el) => {
-      stack.push(el);
-      this.size++;
-    };
-    this.peek = () => stack[stack.length - 1];
-  })()
+let stack = []; // make the stack a private variable
+return (() => { // use IIFE to encapsulate
+  this.size = 0;
+  this.pop = () => {
+    if (stack.pop()) {
+      this.size--;
+    } else {
+      throw `Empty stack`;
+    }
+  };
+  this.push = (el) => {
+    stack.push(el);
+    this.size++;
+  };
+  this.peek = () => stack[stack.length - 1];
+})()
 }
 
 // let a = new Stack();
