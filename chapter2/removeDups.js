@@ -7,9 +7,9 @@ class ListNode {
   }
 
   printNode(node) {
-    if (node !== null) {
+    while (node !== null) {
       console.log(node.val);
-      this.printNode(node.next);
+      node = node.next;
     }
   }
 }
