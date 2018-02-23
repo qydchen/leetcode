@@ -1,6 +1,6 @@
 // Implement an algorithm to delete a node in the middle (i.e, any node but
 // the first and last node, not necessarily the exact middle) of a singly linked
-// list, given only access to that node
+// list
 
 function ListNode(val) {
   this.val = val;
@@ -47,5 +47,5 @@ head2.next.next = new ListNode('c');
 head2.next.next.next = new ListNode('d');
 head2.next.next.next.next = new ListNode('e');
 
-deleteMidNode(head2) // should delete node 'c'
-head2.print(head2);
+// deleteMidNode(head2) // should delete node 'c'
+// head2.print(head2);
