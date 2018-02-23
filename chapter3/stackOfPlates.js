@@ -26,19 +26,23 @@ class SetOfStacks {
 
   pop() {
     if (this.set.length === 0) {
-      throw `No More Stacks`;
+      return false;
     }
-    if (this.currentStack.size <= 1) {
-      this.current--;
-      this.set.pop();
-      this.currentStack = this.set[this.current];
-    } else {
-      this.currentStack.pop();
-    }
+    this.currentStack.pop();
+    this.shrink();
   }
 
   peek() {
     return this.currentStack ? this.currentStack.peek() : null;
+  }
+
+  popAt(idx) {
+    if (this.set[idx] && this.set[idx].size) {
+      this.set[idx].pop();
+    } else {
+      return false;
+    }
+    this.shrink();
   }
 
   addStack() {
@@ -47,29 +51,32 @@ class SetOfStacks {
     this.currentStack = this.set[this.current];
   }
 
-  popAt(idx) {
-    this.set[idx].pop();
+  shrink() {
+    if (this.currentStack.size === 0) {
+      this.current--;
+      this.set.pop();
+      this.currentStack = this.set[this.current];
+    }
   }
-
 }
 
 function Stack() {
-let stack = []; // make the stack a private variable
-return (() => { // use IIFE to encapsulate
-  this.size = 0;
-  this.pop = () => {
-    if (stack.pop()) {
-      this.size--;
-    } else {
-      throw `Empty stack`;
-    }
-  };
-  this.push = (el) => {
-    stack.push(el);
-    this.size++;
-  };
-  this.peek = () => stack[stack.length - 1];
-})()
+  let stack = []; // make the stack a private variable
+  return (() => { // use IIFE to encapsulate
+    this.size = 0;
+    this.pop = () => {
+      if (stack.pop()) {
+        this.size--;
+      } else {
+        return false;
+      }
+    };
+    this.push = (el) => {
+      stack.push(el);
+      this.size++;
+    };
+    this.peek = () => stack[stack.length - 1];
+  })()
 }
 
 // let a = new Stack();
@@ -92,8 +99,9 @@ set.push('d')
 set.push('e')
 set.push('f')
 // console.log(set.set)
-set.popAt(0)
+set.popAt(1)
 // console.log(set.set)
-set.popAt(0)
-set.popAt(0)
-console.log(set.set)
+set.popAt(1)
+set.popAt(1)
+set.popAt(1)
+// console.log(set.set);
