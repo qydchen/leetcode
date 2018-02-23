@@ -30,7 +30,9 @@ function deleteMidNode(node) {
       break;
     }
   }
-  node.next = slow.next;
+  if (slow !== null) {
+    node.next = slow.next;
+  }
 }
 
 let head1 = new ListNode('a');
@@ -49,3 +51,6 @@ head2.next.next.next.next = new ListNode('e');
 
 // deleteMidNode(head2) // should delete node 'c'
 // head2.print(head2);
+
+let head3 = null;
+deleteMidNode(head3);

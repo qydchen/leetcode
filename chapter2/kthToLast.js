@@ -13,6 +13,9 @@ function returnKthToLast(node, k) {
   let front = node;
   let space = 0;
   while (space < k) {
+    if (front === null) {
+      return null;
+    }
     front = front.next;
     space++;
   }
