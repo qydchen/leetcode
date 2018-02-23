@@ -1,5 +1,7 @@
 // Implement a function to check if a linked list is a palindrome.
 
+// O(n) time
+// O(n) space // where the stack is the space
 class ListNode {
   constructor(val) {
     this.val = val;
@@ -8,7 +10,7 @@ class ListNode {
 
   print(node) {
     while (node !== null) {
-      console.log(node.val)
+      console.log(node.val);
       node = node.next;
     }
   }
@@ -35,7 +37,6 @@ class Stack {
   }
 }
 
-
 function checkPalindrome(node) {
   let stack = new Stack();
   if (node !== null) {
@@ -48,16 +49,16 @@ function checkPalindrome(node) {
   while (fast !== null && fast.next !== null) {
     stack.push(current);
     fast = fast.next.next;
-    current = current.next
+    current = current.next;
   }
-  if (fast !== null) {
+  if (fast !== null) { // handles odd # of nodes
     current = current.next;
   }
   while (current !== null) {
     if (stack.peek().val !== current.val) {
       return false;
     }
-    stack.pop()
+    stack.pop();
     current = current.next;
   }
   return true;
@@ -69,7 +70,7 @@ head.next = new ListNode('b');
 head.next.next = new ListNode('a');
 
 console.log(checkPalindrome(head)); // => true;
-// head.print(head);
+head.print(head);
 
 let head2 = new ListNode('r');
 head2.next = new ListNode('a');

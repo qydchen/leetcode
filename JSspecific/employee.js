@@ -11,8 +11,9 @@ class Employee {
 Employee.prototype.isFired = false;
 Employee.prototype.motto = 'Hello';
 
-const fred = new Employee('Fred', 22, '123 Fake st', 'CS', {name: 'Ted', manager_id: 42})
-// Do not print out the prototype properties
+const fred = new Employee('Fred', 22, '123 Fake st', 'CS', {name: 'Ted', manager_id: 42});
+// Do not include out the prototype properties
+
 function lookUp(obj) {
   let res = [];
   for (let k in obj) {
@@ -23,4 +24,4 @@ function lookUp(obj) {
   return res;
 }
 
-console.log(lookUp(fred)) // => [Fred,22,123 Fakest, CS, Ted, 42]
+console.log(lookUp(fred)) // => [Fred,22,123 Fake st, CS, Ted, 42]
