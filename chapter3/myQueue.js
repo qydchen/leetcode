@@ -4,39 +4,36 @@ class MyQueue {
   constructor() {
     this.stack1 = new Stack();
     this.stack2 = new Stack();
-    this.current = this.stack1;
-    this.other = this.stack2;
-
   }
 
   enqueue(el) {
-    this.current.push(el);
-    return this.current.size;
+    this.stack1.push(el);
+    return this.stack1.size;
   }
 
   dequeue() {
-    while (this.current.size > 1) {
-      this.other.push(this.current.peek());
-      this.current.pop();
+    while (this.stack1.size > 1) {
+      this.stack2.push(this.stack1.peek());
+      this.stack1.pop();
     }
-    let dequeued = this.current.peek();
-    this.current.pop();
-    while (this.other.size > 0) {
-      this.current.push(this.other.peek());
-      this.other.pop();
+    let dequeued = this.stack1.peek();
+    this.stack1.pop();
+    while (this.stack2.size > 0) {
+      this.stack1.push(this.stack2.peek());
+      this.stack2.pop();
     }
     return dequeued;
   }
 
   peek() {
-    while (this.current.size > 1) {
-      this.other.push(this.current.peek());
-      this.current.pop();
+    while (this.stack1.size > 1) {
+      this.stack2.push(this.stack1.peek());
+      this.stack1.pop();
     }
-    let peek = this.current.peek();
-    while (this.other.size > 0) {
-      this.current.push(this.other.peek());
-      this.other.pop();
+    let peek = this.stack1.peek();
+    while (this.stack2.size > 0) {
+      this.stack1.push(this.stack2.peek());
+      this.stack2.pop();
     }
     return peek;
   }
