@@ -1,6 +1,9 @@
 // Given a circular linked list, implement an algorithm that returns the node
 // at the beginning of the loop.
 
+// O(n) time
+// O(1) space
+
 class ListNode {
   constructor(val) {
     this.val = val;
