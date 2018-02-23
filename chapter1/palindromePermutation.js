@@ -17,6 +17,6 @@ function palindromePermutation(str) {
   return set.size <= 1 ? true : false;
 }
 
-console.log(palindromePermutation('Tact Coa')) // => true because 'taco cat' 'atco cta'
-console.log(palindromePermutation('rraacce')) // => true because 'racecar'
-console.log(palindromePermutation('a')) // => true because 'a'
+// console.log(palindromePermutation('Tact Coa')) // => true because 'taco cat' 'atco cta'
+// console.log(palindromePermutation('rraacce')) // => true because 'racecar'
+// console.log(palindromePermutation('a')) // => true because 'a'
