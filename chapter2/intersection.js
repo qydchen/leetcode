@@ -7,17 +7,13 @@
 // 3 - 2 - 6 \
 //             7 - 3 - 1 - 11
 //     5 - 9 /
-
 // 7 is the intersection
 
 // 1. traverse both linked lists to get to the end, while getting the length of both
 // linked lists.
-
 // 2. increment the longer list the difference between the long and short to
 // traverse simultaneously while checking each node they traverse for equality
-
 // 3. return the first traversal that has the same node
-
 class ListNode {
   constructor(val) {
     this.val = val;
@@ -57,7 +53,6 @@ function intersection(l1, l2) {
   }
 
   return longer;
-
 }
 
 function getTailAndSize(node) {
