@@ -5,6 +5,8 @@ function ListNode(val) {
   this.next = null;
 }
 
+// O(n) time
+// O(1) space
 
 function returnKthToLast(node, k) {
   let back = node;
@@ -29,6 +31,6 @@ head.next.next.next.next = new ListNode('b');
 head.next.next.next.next.next = new ListNode('b');
 head.next.next.next.next.next.next = new ListNode('c');
 
-console.log(returnKthToLast(head, 0)) // => ListNode('c')
-console.log(returnKthToLast(head, 1)) // => ListNode('b')
-console.log(returnKthToLast(head, 2)) // => ListNode('b')
+console.log(returnKthToLast(head, 0)); // => ListNode('c')
+console.log(returnKthToLast(head, 1)); // => ListNode('b')
+console.log(returnKthToLast(head, 2)); // => ListNode('b')
