@@ -51,6 +51,6 @@ head.next.next.next = new ListNode('a');
 head.next.next.next.next = new ListNode('b');
 head.next.next.next.next.next = new ListNode('b');
 head.next.next.next.next.next.next = new ListNode('c');
-// removeDups1(head);
+removeDups1(head);
 removeDups2(head);
 head.printNode(head);
