@@ -3,7 +3,7 @@
 
 // time complexity = O(n) where n is string.length
 // can argue to be O(1) since loop can never iterate over 128 chars assuming ASCII
-// space complexity = O(1)
+// space complexity = O(1) // can be O(c) space where c is the size of the char set
 
 function isUnique(str) { // with data structure;
   let mem = {};
@@ -21,6 +21,8 @@ function isUnique(str) { // with data structure;
 // console.log(isUnique('halleujiah')) // => false;
 // console.log(isUnique('asdfghjkl')) // => true;
 
+// time complexity = O(n^2)
+// space compexity = O(1)
 function isUnique2(str) { // without data structure;
   for (let i = 0; i < str.length; i++) {
     let char1 = str[i];
