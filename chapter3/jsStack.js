@@ -4,7 +4,7 @@ function Stack() {
     this.size = 0;
     this.pop = () => {
       const popped = stack.pop();
-      if (popped) {
+      if (popped !== undefined) {
         this.size--;
         return popped;
       } else {
