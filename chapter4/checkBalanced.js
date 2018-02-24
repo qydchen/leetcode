@@ -22,7 +22,6 @@ function checkBalanced(tree) {
   return checkHeight(tree) !== Number.MIN_VALUE;
 }
 
-
 // console.log(checkBalanced(ans1));
 // console.log(checkBalanced(ans2));
 // console.log(checkBalanced(ans3));
