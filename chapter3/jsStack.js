@@ -12,6 +12,9 @@ function Stack() {
       }
     };
     this.push = (el) => {
+      if (el === undefined) {
+        throw `Cannot push undefined`;
+      }
       stack.push(el);
       this.size++;
       return el;
