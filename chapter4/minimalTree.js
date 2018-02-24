@@ -23,27 +23,23 @@ function minimalTree(array) {
 const arr1 = [1, 2, 3, 5, 6, 7, 8];
 const arr2 = [1, 2, 3, 4, 5, 6, 7, 8];
 const baseCase = [5];
-const evenCase = [4, 6]
-const oddCase = [1, 2, 3]
+const evenCase = [4, 6];
+const oddCase = [1, 2, 3];
 
-const ans1 = minimalTree(arr1) // =>
+const ans1 = minimalTree(arr1); // =>
 //       5
 //    2     7
 //  1   3  6  8
-
-const ans2 = minimalTree(arr2) // =>
-//       4
-//    2     6
-//  1   3  5  7
-//              8
-
-const ans3 = minimalTree(baseCase) // => 5;
-
-const ans4 = minimalTree(evenCase) // =>
+const ans2 = minimalTree(arr2); // =>
+//        5
+//     3     7
+//   2   4  6  8
+// 1
+const ans3 = minimalTree(baseCase); // => 5;
+const ans4 = minimalTree(evenCase); // =>
 // 4
 //   6
-
-const ans5 = minimalTree(oddCase) // =>
+const ans5 = minimalTree(oddCase); // =>
 //   2
 // 1   3
 
