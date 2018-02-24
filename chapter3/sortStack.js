@@ -3,10 +3,9 @@
 // elements into any other data structure (such as an array). The stack
 // supports the following operations: push, pop, peek, and isEmpty.
 
-
-
+// REVIEW THIS
 function sortStack(stack) {
-  
+
 }
 
 function Stack() {

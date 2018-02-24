@@ -5,8 +5,6 @@
 // 'right partitions'; it does not need to appear between the left and
 // right partitions
 
-
-// REVIEW THIS
 class ListNode {
   constructor(val) {
     this.val = val;
@@ -23,10 +21,10 @@ class ListNode {
 }
 
 function partition(node, num) {
-  let beforeStart = null
-  let beforeEnd = null
-  let afterStart = null
-  let afterEnd = null
+  let beforeStart = null;
+  let beforeEnd = null;
+  let afterStart = null;
+  let afterEnd = null;
 
   while (node !== null) {
     let {next} = node;
@@ -41,7 +39,7 @@ function partition(node, num) {
       }
     } else {
       if (!afterStart) {
-        afterStart = node
+        afterStart = node;
         afterEnd = afterStart;
       } else {
         afterEnd.next = node;
@@ -65,5 +63,5 @@ head.next.next.next.next = new ListNode(10);
 head.next.next.next.next.next = new ListNode(2);
 head.next.next.next.next.next.next = new ListNode(1);
 
-let list = partition(head, 6)
-list.print(list)
+let list = partition(head, 6);
+list.print(list);
