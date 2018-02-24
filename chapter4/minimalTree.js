@@ -73,4 +73,5 @@ module.exports = {
   ans3,
   ans4,
   ans5,
+  TreeNode,
 }
