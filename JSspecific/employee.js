@@ -12,7 +12,7 @@ Employee.prototype.isFired = false;
 Employee.prototype.motto = 'Hello';
 
 const fred = new Employee('Fred', 22, '123 Fake st', 'CS', {name: 'Ted', manager_id: 42});
-// Do not include out the prototype properties
+// Do not include the prototype properties
 
 function lookUp(obj) {
   let res = [];
@@ -21,7 +21,7 @@ function lookUp(obj) {
       res = obj[k] instanceof Object ? res.concat(lookUp(obj[k])) : res.concat(`${k}: ${obj[k]}`);
     }
   }
-  return res;
+  return res.join(", ");
 }
 
 console.log(lookUp(fred)) // => [Fred,22,123 Fake st, CS, Ted, 42]
