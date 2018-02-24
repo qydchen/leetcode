@@ -20,7 +20,7 @@ function routeBetweenNodes(root) {
       let child = removed.children[i];
       if (!child.visited) {
         child.visited = true;
-        queue.push(child)
+        queue.push(child);
       } else {
         return true;
       }
