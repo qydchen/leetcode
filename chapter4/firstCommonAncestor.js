@@ -18,16 +18,16 @@ function leastCommonAncestor(root, node1, node2) {
   return left !== null ? left : right;
 }
 
-const a = new TreeNode('a')
-const b = new TreeNode('b')
-const c = new TreeNode('c')
-const d = new TreeNode('d')
-const e = new TreeNode('e')
-const f = new TreeNode('f')
-const g = new TreeNode('g')
-const h = new TreeNode('h')
-const i = new TreeNode('i')
-const x = new TreeNode('x')
+const a = new TreeNode('a');
+const b = new TreeNode('b');
+const c = new TreeNode('c');
+const d = new TreeNode('d');
+const e = new TreeNode('e');
+const f = new TreeNode('f');
+const g = new TreeNode('g');
+const h = new TreeNode('h');
+const i = new TreeNode('i');
+const x = new TreeNode('x');
 
 
 const tree = a;
@@ -41,5 +41,5 @@ tree.left.left.left = h;
 tree.left.left.right = i;
 tree.right.right.left = x;
 
-console.log(leastCommonAncestor(tree, i, e)) // b
-console.log(leastCommonAncestor(tree, f, x)) // c
+console.log(leastCommonAncestor(tree, i, e)); // b
+console.log(leastCommonAncestor(tree, f, x)); // c
