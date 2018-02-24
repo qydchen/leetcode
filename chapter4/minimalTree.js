@@ -8,6 +8,8 @@ class TreeNode {
   }
 }
 
+// O(log n) time
+// O(log n) space
 function minimalTree(array) {
   if (array.length === 0) return null;
   if (array.length === 1) return new TreeNode(array[0]);
@@ -37,8 +39,8 @@ const ans2 = minimalTree(arr2); // =>
 // 1
 const ans3 = minimalTree(baseCase); // => 5;
 const ans4 = minimalTree(evenCase); // =>
-// 4
 //   6
+// 4
 const ans5 = minimalTree(oddCase); // =>
 //   2
 // 1   3
@@ -64,3 +66,11 @@ function preOrderPrint(node) {
 // inOrderPrint(ans3)
 // inOrderPrint(ans4)
 // inOrderPrint(ans5)
+
+module.exports = {
+  ans1,
+  ans2,
+  ans3,
+  ans4,
+  ans5,
+}
