@@ -1,4 +1,7 @@
 // Given a BST and two nodes, find the most recent ancestor of the two nodes.
+// O(log n) time. log n traversal and log n length of the arrays
+// O(log n) space. creating the array is log n
+
 class TreeNode {
   constructor(val) {
     this.val = val;
