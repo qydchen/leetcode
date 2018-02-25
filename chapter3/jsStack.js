@@ -1,5 +1,6 @@
 function Stack() {
   const stack = [];
+  this.size = 0;
   return (() => {
     this.size = 0;
     this.pop = () => {
