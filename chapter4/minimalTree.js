@@ -1,5 +1,5 @@
 // Given a sorted (increasing order) array with unique integer elements, write an
-// algorithm to reate a binary search tree with minimal height
+// algorithm to create a binary search tree with minimal height
 
 class TreeNode {
   constructor(val) {
@@ -8,8 +8,8 @@ class TreeNode {
   }
 }
 
-// O(log n) time
-// O(log n) space
+// O(n) time // time taken for an array of size n
+// O(h) space, where h is the height of the tree ????
 function minimalTree(array) {
   if (array.length === 0) return null;
   if (array.length === 1) return new TreeNode(array[0]);
