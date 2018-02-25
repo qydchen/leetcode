@@ -9,13 +9,13 @@ class TreeNode {
 }
 
 function leastCommonAncestor(root, node1, node2) {
-  if (!root) return null;
-  if (root === node1 || root == node2) return root;
+  if (!root) return null; // at leaf node
+  if (root === node1 || root === node2) return root; // if found, return that node
   const left = leastCommonAncestor(root.left, node1, node2);
   const right = leastCommonAncestor(root.right, node1, node2);
-  if (left !== null && right !== null) return root;
-  if (left === null && right === null) return null;
-  return left !== null ? left : right;
+  if (left !== null && right !== null) return root; // if the left AND right returns a node, bubble up the current node
+  if (left === null && right === null) return null; // if the left AND right bubbled up a null, bubble up another null
+  return left !== null ? left : right; // bubble up the ancestor node and return it
 }
 
 const a = new TreeNode('a');
@@ -40,5 +40,5 @@ tree.left.left.left = h;
 tree.left.left.right = i;
 tree.right.right.left = x;
 
-console.log(leastCommonAncestor(tree, i, e)); // b
-console.log(leastCommonAncestor(tree, f, x)); // c
+// console.log(leastCommonAncestor(tree, i, e)); // b
+// console.log(leastCommonAncestor(tree, f, x)); // c
