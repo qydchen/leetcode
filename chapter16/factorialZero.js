@@ -13,7 +13,6 @@ function factorialZero(n) {
       pairs[2] += i / 2;
     }
   }
-  console.log(pairs)
   return Math.min(pairs[5], pairs[2]);
 }
 
