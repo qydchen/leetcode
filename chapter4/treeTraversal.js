@@ -31,8 +31,6 @@ function postOrder(node) {
     console.log(node.val)
   }
 }
-
-
 //       a
 //     b   c
 //   d  e  f  g

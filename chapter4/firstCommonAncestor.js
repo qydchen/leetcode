@@ -29,7 +29,6 @@ const h = new TreeNode('h');
 const i = new TreeNode('i');
 const x = new TreeNode('x');
 
-
 const tree = a;
 tree.left = b;
 tree.right = c;
