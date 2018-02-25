@@ -23,14 +23,9 @@ class ListNode {
 }
 
 function checkLoop(node) {
-  let slow;
-  let fast;
-  if (node !== null) {
-    slow = node;
-    fast = node;
-  } else {
-    return false;
-  }
+  if (!node) return false;
+  let slow = node;
+  let fast = node;
 
   while (fast !== null && fast.next !== null) {
     fast = fast.next.next;
