@@ -14,21 +14,13 @@ function ListNode(val) {
 }
 
 function deleteMidNode(node) {
-  let slow = null;
+  let slow = node;
   let fast = node;
 
-  while (fast !== null) {
-    if (slow === null) {
-      slow = node;
-    } else {
-      node = slow
-      slow = slow.next;
-    }
-    if (fast.next !== null) {
-      fast = fast.next.next;
-    } else {
-      break;
-    }
+  while (fast !== null && fast.next !== null) {
+    node = slow;
+    slow = slow.next;
+    fast = fast.next.next;
   }
   if (slow !== null) {
     node.next = slow.next;
@@ -40,8 +32,8 @@ head1.next = new ListNode('b');
 head1.next.next = new ListNode('c');
 head1.next.next.next = new ListNode('d');
 
-// deleteMidNode(head1) // should delete node 'b'
-// head1.print(head1);
+deleteMidNode(head1) // should delete node 'b'
+head1.print(head1);
 
 let head2 = new ListNode('a');
 head2.next = new ListNode('b');
@@ -49,8 +41,8 @@ head2.next.next = new ListNode('c');
 head2.next.next.next = new ListNode('d');
 head2.next.next.next.next = new ListNode('e');
 
-// deleteMidNode(head2) // should delete node 'c'
-// head2.print(head2);
+deleteMidNode(head2) // should delete node 'c'
+head2.print(head2);
 
 let head3 = null;
 deleteMidNode(head3);
