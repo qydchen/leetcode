@@ -58,4 +58,5 @@ tree.right.right.left = sixteen;
 
 console.log(findMostRecentAncestor(tree, sixteen, eleven)) // => node fourteen
 console.log(findMostRecentAncestor(tree, null, null)) // => null
-console.log(findMostRecentAncestor(tree, seventeen, five)) // => null
+console.log(findMostRecentAncestor(tree, seventeen, five)) // => node seven
+console.log(findMostRecentAncestor(tree, two, five)); // node 4
