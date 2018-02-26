@@ -15,9 +15,13 @@ function palindromePermutation(str) {
     }
     set.has(char) ? set.delete(char) : set.add(char);
   }
-  return set.size <= 1 ? true : false;
+  return set.size <= 1;
 }
 
 // console.log(palindromePermutation('Tact Coa')) // => true because 'taco cat' 'atco cta'
 // console.log(palindromePermutation('rraacce')) // => true because 'racecar'
 // console.log(palindromePermutation('a')) // => true because 'a'
+// console.log(palindromePermutation('ab')) // => f
+// console.log(palindromePermutation('abb')) // => t
+// console.log(palindromePermutation('abba')) // => t
+// console.log(palindromePermutation('abbc')) // => f
