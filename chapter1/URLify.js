@@ -25,11 +25,8 @@ function URLify(str, length) {
 // O(n) time to split and then remove the empty strings in reverse
 // O(1) space
 function URLify2(str, length) {
-  str = str.split(' ')
-  while (str[str.length - 1].length === 0) {
-    str.pop();
-  }
-  return str = str.join('%20');
+  str = str.slice(0, length);
+  return str = str.split(' ').join('%20');
 }
 
 console.log(URLify2('Mr John Smith     ', 13)) // => 'Mr%20John%20Smith'

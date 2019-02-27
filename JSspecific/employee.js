@@ -24,4 +24,4 @@ function lookUp(obj) {
   return res.join(", ");
 }
 
-console.log(lookUp(fred)) // => [Fred,22,123 Fake st, CS, Ted, 42]
+console.log(lookUp(fred)); // => [Fred, 22, 123 Fake st, CS, Ted, 42]

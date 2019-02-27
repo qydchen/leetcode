@@ -26,17 +26,17 @@ let addTwoNumbers = function(l1, l2) {
 };
 
 
-let one = new ListNode(2)
-one.next = new ListNode(5)
-one.next.next = new ListNode(3)
+let one = new ListNode(2);
+one.next = new ListNode(5);
+one.next.next = new ListNode(3);
 
-let two = new ListNode(2)
-two.next = new ListNode(5)
-two.next.next = new ListNode(3)
-two.next.next.next = new ListNode(8)
-two.next.next.next.next = new ListNode(9)
+let two = new ListNode(2);
+two.next = new ListNode(5);
+two.next.next = new ListNode(3);
+two.next.next.next = new ListNode(8);
+two.next.next.next.next = new ListNode(9);
 
-console.log(addTwoNumbers(one, two))
+console.log(addTwoNumbers(one, two));
 
-let five = new ListNode(5)
-console.log(addTwoNumbers(five, five))
+let five = new ListNode(5);
+console.log(addTwoNumbers(five, five));
