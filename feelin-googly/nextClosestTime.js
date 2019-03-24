@@ -19,6 +19,9 @@ Explanation: The next closest time choosing from digits 2, 3, 5, 9, is 22: 22. I
 the returned time is next day's time since it is smaller than the input time numerically.
 */
 
+// Increment every minute, check if each of the digits in the new time exist in the set of the original time.
+// If true, return the new time, else, continue looping until the time is established.
+
 const nextClosestTime = time => {
     const digits = time.split(':').join('').split(''); // [1,9,3,4]
     let [ hours, minutes ] = time.split(':').map(Number);
