@@ -1,4 +1,5 @@
 const assert = require('assert');
+// https://leetcode.com/explore/featured/card/google/59/array-and-strings/341/
 /* Trapping Rain Water
 Go to Discuss
 Given n non - negative integers representing an elevation map where the width
