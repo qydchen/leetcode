@@ -29,14 +29,12 @@ const spiralOrder = (matrix) => {
     let vertMax = matrix.length - 1, horizontalMax = matrix[0].length - 1, vertMin = 0, horizontalMin = 0, rowIdx = 0, colIdx = 0,
     isRowIdxDecrementing = false, isRowIdxIncrementing = false, isColIdxIncrementing = true, isColIdxDecrementing = false;
     while (result.length !== total) {
-        console.log('rowIdx:', rowIdx, 'vertMax:', vertMax, 'colIdx:', colIdx, 'horizontalMax:', horizontalMax);
-        console.log('vertMin:', vertMin, 'horizontalMin:', horizontalMin);
         result.push(matrix[rowIdx][colIdx]);
         if (isRowIdxIncrementing) {
             if (rowIdx < vertMax) {
                 rowIdx += 1;
-                continue;
-            } else if (rowIdx >= vertMax) {
+            } 
+            if (rowIdx >= vertMax) {
                 isRowIdxIncrementing = false;
                 isColIdxDecrementing = true;
                 vertMax -= 1;
@@ -46,19 +44,20 @@ const spiralOrder = (matrix) => {
         if (isColIdxIncrementing) {
             if (colIdx < horizontalMax) {
                 colIdx += 1;
-                continue;
-            } else if (colIdx >= horizontalMax) {
+            }
+            if (colIdx >= horizontalMax) {
                 isColIdxIncrementing = false;
                 isRowIdxIncrementing = true;
                 horizontalMax -= 1;
+                vertMin += 1;
                 continue;
             }
         }
         if (isRowIdxDecrementing) {
             if (rowIdx > vertMin) {
                 rowIdx -= 1;
-                continue;
-            } else if (rowIdx <= vertMin) {
+            } 
+            if (rowIdx <= vertMin) {
                 isRowIdxDecrementing = false;
                 isColIdxIncrementing = true;
                 vertMin += 1;
@@ -68,8 +67,8 @@ const spiralOrder = (matrix) => {
         if (isColIdxDecrementing) {
             if (colIdx > horizontalMin) {
                 colIdx -= 1;
-                continue;
-            } else if (colIdx <= horizontalMin) {
+            }
+            if (colIdx <= horizontalMin) {
                 isColIdxDecrementing = false,
                 isRowIdxDecrementing = true;
                 horizontalMin += 1;
