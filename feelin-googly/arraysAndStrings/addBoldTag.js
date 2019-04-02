@@ -24,11 +24,21 @@
  */
 const addBoldTag = (s, dict) => {
     let result = '';
-    const indices = dict.map(str => s.indexOf(str));
-    // [0, 6]
-    // [3, 3]
-
-    // 0, 1, 4
-    // 3, 3, 2
+    let stringBuild = '';
+    let indices = dict.map(str => ({ index: s.indexOf(str), len: str.length, str }));
+    indices.sort((a, b) => a.index - b.index);
+    for (let i = 0; i < indices.length; i++) {
+        const curr = indices[i];
+        if (curr.index > -1) {
+            stringBuild += curr.str;
+        };
+        for (let j = i + 1; j < indices.length; j++) {
+            const ahead = indices[j];
+            if (ahead.index <= curr.index + curr.len) {
+                let math = ahead.index - (curr.index + curr.len);
+                stringBuild = stringBuild.slice(0, math) + ahead.str;
+            }
+        }
+    }
     return result;
 };
