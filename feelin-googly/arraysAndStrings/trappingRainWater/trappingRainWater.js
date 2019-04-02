@@ -30,4 +30,7 @@ const trap = (height) => {
     return totalAmount;
 };
 
+// time O(n), 2 for loop iterations
+// space O(n), leftHighest generates an array based on the size of the input
+
 assert.equal(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]), 6);
