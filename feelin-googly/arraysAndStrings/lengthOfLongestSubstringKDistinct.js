@@ -20,19 +20,32 @@
 // - once the set contains more than k elements, return the string
 
 const lengthOfLongestSubstringKDistinct = (s, k) => {
-    let set = new Set();
+    let longest = 0;
     let result = '';
-    for (let i = 0; i < s.length; i++) {
-        if (!set.has(s[i])) {
-            if (set.size < k) {
-                set.add(s[i]);
-            } else {
-                return result.length;
-            }
-        }
-        result += s[i];
+    if (k === 0) {
+        return result;
     }
-    return result.length;
+    if (k >= s.length) {
+        return s.length;
+    }
+    for (let i = 0; i < s.length; i++) {
+        const set = new Set();
+        result = '';
+        for (let j = i; j < s.length; j++) {
+            if (!set.has(s[j])) {
+                if (set.size < k) {
+                    set.add(s[j]);
+                } else {
+                    break;
+                }
+            }
+            result += s[j];
+            longest = Math.max(longest, result.length); 
+        }
+    }
+    return longest;
 };
 
-console.log(lengthOfLongestSubstringKDistinct('eceba', 2));
+console.log(lengthOfLongestSubstringKDistinct('a', 1)); // 1
+console.log(lengthOfLongestSubstringKDistinct('eceba', 2)); // => 3
+console.log(lengthOfLongestSubstringKDistinct('bcaa', 2)); // => 3
