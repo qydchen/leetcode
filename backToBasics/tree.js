@@ -47,7 +47,7 @@ function bfs(node, searchVal) {
     let queue = [];
     queue.push(node);
     while (queue.length !== 0) {
-        let current = queue[0];
+        let current = queue.shift();
         if (current.val === searchVal) return current;
         if (current.left !== null) {
             queue.push(current.left);
@@ -55,7 +55,6 @@ function bfs(node, searchVal) {
         if (current.right !== null) {
             queue.push(current.right);
         }
-        queue.shift();
     }
     return null;
 }
