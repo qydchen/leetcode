@@ -1,4 +1,4 @@
-// Write code to remove duplicates from an unsorted linked list.
+// Write code to remove duplicates from a sorted linked list.
 
 class ListNode {
   constructor(val) {
