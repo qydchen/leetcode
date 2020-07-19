@@ -5,6 +5,11 @@
 
 // Use a set. The length of the set should be empty or only 1 if a string is a palindrome
 // When the set size is less than or equal to 1, we know that is going to be a palindrome
+
+// Time complexity: O(n) where n is the input size of str
+// Space complexity: O(1) the set can grow up to a maximum number of all distinct elements.
+// However, the number of distinct characters are bounded (128 characters assuming ASCII)
+
 function palindromePermutation(str) {
   const standard = str.toLowerCase();
   const set = new Set();
