@@ -29,7 +29,7 @@ function removeDups1(head) {
   }
 }
 
-//Solution 2 without set, O(n^2) time, O(1) space
+//Solution 2 without set, O(n) time, O(1) space
 function removeDups2(head) {
   while (head !== null) {
     let runner = head;
