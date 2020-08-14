@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require("assert");
 // https://leetcode.com/explore/featured/card/google/59/array-and-strings/341/
 /* Trapping Rain Water
 Go to Discuss
@@ -17,15 +17,16 @@ const trap = (height) => {
     if (height === null || height.length === 0) {
         return totalAmount;
     }
-    let leftHighest = [];
-    leftHighest[0] = 0;
-    for (let i = 0; i < height.length; i++) {
-        leftHighest[i + 1] = Math.max(leftHighest[i], height[i]);
-    }
+    const runningMax = height.reduce((a, e, i) => {
+        return a.length > 0 ? [...a, Math.max(e, a[i - 1])] : [0];
+    }, []);
     let rightHighest = 0;
     for (let i = height.length - 1; i >= 0; i--) {
         rightHighest = Math.max(height[i], rightHighest);
-        totalAmount += Math.min(leftHighest[i], rightHighest) > height[i] ? Math.min(leftHighest[i], rightHighest) - height[i] : 0;
+        totalAmount +=
+            Math.min(runningMax[i], rightHighest) > height[i]
+                ? Math.min(runningMax[i], rightHighest) - height[i]
+                : 0;
     }
     return totalAmount;
 };
