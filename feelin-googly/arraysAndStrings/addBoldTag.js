@@ -23,15 +23,19 @@
  * @return {string}
  */
 const addBoldTag = (s, dict) => {
-    let result = '';
-    let stringBuild = '';
-    let indices = dict.map(str => ({ index: s.indexOf(str), len: str.length, str }));
+    let result = "";
+    let stringBuild = "";
+    let indices = dict.map((str) => ({
+        index: s.indexOf(str),
+        len: str.length,
+        str,
+    }));
     indices.sort((a, b) => a.index - b.index);
     for (let i = 0; i < indices.length; i++) {
         const curr = indices[i];
         if (curr.index > -1) {
             stringBuild += curr.str;
-        };
+        }
         for (let j = i + 1; j < indices.length; j++) {
             const ahead = indices[j];
             if (ahead.index <= curr.index + curr.len) {
