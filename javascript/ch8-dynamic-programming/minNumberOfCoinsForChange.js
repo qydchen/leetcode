@@ -10,6 +10,7 @@ function minNumberOfCoinsForChange(n, denoms) {
     mins[0] = 0;
     for (let denom of denoms) {
         for (let amt = 0; amt < mins.length; amt += 1) {
+            console.log(mins);
             if (amt >= denom) {
                 mins[amt] = Math.min(mins[amt], mins[amt - denom] + 1);
             }
@@ -19,3 +20,4 @@ function minNumberOfCoinsForChange(n, denoms) {
 }
 
 console.log(minNumberOfCoinsForChange(3, [2, 1]));
+console.log(minNumberOfCoinsForChange(50, [2, 1, 5]));
