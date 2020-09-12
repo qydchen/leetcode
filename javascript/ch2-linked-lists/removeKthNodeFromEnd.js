@@ -1,3 +1,16 @@
+/*
+    Implement a function that removes the kth node from the end from a linked list
+
+    a -> b -> c -> d
+
+    head = node 'a'
+    
+    removeKthNodeFromEnd(head, 2)
+    a -> b -> c -> d -> null
+    0    1    2    3    4
+    remove the 2nd to last node, which is 'c'
+*/
+
 class LinkedList {
     constructor(value) {
         this.value = value;
@@ -8,8 +21,8 @@ class LinkedList {
 function removeKthNodeFromEnd(head, k) {
     let behind = head;
     let ahead = head;
-    let count = 1;
-    while (count <= k) {
+    let count = 0;
+    while (count < k) {
         ahead = ahead.next;
         count++;
     }
