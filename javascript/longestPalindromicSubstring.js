@@ -31,21 +31,21 @@ function longestPalindrome(s) {
     for (let i = 0; i < s.length; i++) {
         let odd = expand(s, i, i);
         let even = expand(s, i, i + 1);
-        console.log("odd is ", odd);
-        console.log("even is ", even);
+        // console.log("odd is ", odd);
+        // console.log("even is ", even);
         let len = Math.max(odd, even);
         if (len > end - start) {
             start = i - Math.floor((len - 1) / 2);
             end = i + Math.floor(len / 2);
         }
-        console.log("-----");
+        // console.log("-----");
     }
     return s.slice(start, end + 1);
 }
 
 function expand(s, left, right) {
     while (left >= 0 && right < s.length && s[left] === s[right]) {
-        console.log(right, left, s[left], s[right]);
+        // console.log(right, left, s[left], s[right]);
         left--;
         right++;
     }
@@ -57,6 +57,6 @@ function expand(s, left, right) {
 //         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 //     )
 // );
-// console.log(longestPalindrome("cbbd"));
-// console.log(longestPalindrome("abaxyzzyxf"));
-// console.log(longestPalindrome("racecarpepe"));
+console.log(longestPalindrome("cbbd"));
+console.log(longestPalindrome("abaxyzzyxf"));
+console.log(longestPalindrome("racecarpepe"));
