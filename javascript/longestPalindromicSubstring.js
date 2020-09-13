@@ -21,7 +21,10 @@
 //   return true;
 // }
 
-// Naive Solution
+// Better Solution
+// Traverse through every character, and expand left to right
+// O(n^2) time
+// O(n) space
 function longestPalindrome(s) {
     let start = 0,
         end = 0;
@@ -41,14 +44,12 @@ function longestPalindrome(s) {
 }
 
 function expand(s, left, right) {
-    let l = left,
-        r = right;
-    while (l >= 0 && r < s.length && s[l] === s[r]) {
-        console.log(r, l, s[l], s[r]);
-        l--;
-        r++;
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+        console.log(right, left, s[left], s[right]);
+        left--;
+        right++;
     }
-    return r - l - 1;
+    return right - left - 1;
 }
 
 // console.log(
@@ -58,4 +59,4 @@ function expand(s, left, right) {
 // );
 // console.log(longestPalindrome("cbbd"));
 // console.log(longestPalindrome("abaxyzzyxf"));
-console.log(longestPalindrome("racecarpepe"));
+// console.log(longestPalindrome("racecarpepe"));
