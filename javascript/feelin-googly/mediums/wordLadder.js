@@ -48,3 +48,8 @@ const endWord = "cog";
 const wordList = ["hot", "dot", "dog", "lot", "log", "cog"];
 
 console.log(ladderLength(beginWord, endWord, wordList)); // Output: 5 As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", return its length 5.
+
+const a = "a";
+const c = "c";
+const l = [("a", "b", "c")];
+console.log(ladderLength(a, c, l)); // 2
