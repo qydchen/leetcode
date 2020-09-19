@@ -19,17 +19,11 @@ function permutations(arr) {
 
 function permute(arr, currentPermutation, permutations) {
     if (!arr.length && currentPermutation.length) {
-        console.log(`${currentPermutation}`);
-        console.log("----");
         permutations.push(currentPermutation);
     } else {
         for (let i = 0; i < arr.length; i += 1) {
             const newArray = arr.slice(0, i).concat(arr.slice(i + 1));
             const newPerm = currentPermutation.concat([arr[i]]);
-            console.log("newArray", newArray);
-            console.log("newPerm:", newPerm);
-            console.log("permutation:", permutations);
-            console.log("-------");
             permute(newArray, newPerm, permutations);
         }
     }
