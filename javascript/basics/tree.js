@@ -1,4 +1,4 @@
-var assert = require('assert');
+const assert = require("assert");
 // Construct a tree
 
 class TreeNode {
@@ -59,31 +59,42 @@ function bfs(node, searchVal) {
     return null;
 }
 
-const a = new TreeNode('a');
-const b = new TreeNode('b');
-const c = new TreeNode('c');
-const d = new TreeNode('d');
-const e = new TreeNode('e');
+const a = new TreeNode("a");
+const b = new TreeNode("b");
+const c = new TreeNode("c");
+const d = new TreeNode("d");
+const e = new TreeNode("e");
+const f = new TreeNode("f");
+const g = new TreeNode("g");
+const x = new TreeNode("x");
+const y = new TreeNode("y");
 
 a.left = b;
 a.right = c;
 a.left.left = d;
 a.left.right = e;
+a.left.left.left = f;
+a.left.left.right = g;
+
+a.right.left = x;
+a.right.right = y;
 
 inOrderPrint(a);
-console.log('---');
+console.log("---");
 preOrderPrint(a);
-console.log('---');
+console.log("---");
 postOrderPrint(a);
-console.log('---');
+console.log("---");
 
-//   a
-//  b c
-// d e
+//     a
+//   b     c
+// d   e   x y
+//f g
 
-assert.equal(dfs(a, 'e').val, 'e');
-assert.equal(dfs(a, 'd').val, 'd');
+assert.strictEqual(dfs(a, "e").val, "e");
+assert.strictEqual(dfs(a, "d").val, "d");
 
-assert.equal(bfs(a, 'e').val, 'e');
-assert.equal(bfs(a, 'b').val, 'b');
+assert.strictEqual(bfs(a, "e").val, "e");
+assert.strictEqual(bfs(a, "b").val, "b");
 
+module.exports = TreeNode;
