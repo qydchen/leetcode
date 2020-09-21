@@ -30,9 +30,9 @@
 
 // My solution... it fails some test cases though
 var exist = function (board, word) {
+    if (word.length > board.reduce((a, b) => a + b.length, 0)) return false;
     const beginChar = word[0];
     const beginningCoords = findBeginningCoords(beginChar, board);
-    if (word.length > board.reduce((a, b) => a + b.length, 0)) return false;
     for (let coord of beginningCoords) {
         const visited = new Array(board.length)
             .fill()
@@ -52,13 +52,14 @@ function traverse(coord, word, board, visited) {
     if (j < 0 || i < 0 || j > width || i > height) return false;
     if (board[i][j] === word[0] && visited[i][j] === false) {
         visited[i][j] = true;
-        return (
+        if (
             traverse([i, j + 1], word.slice(1), board, visited) ||
             traverse([i, j - 1], word.slice(1), board, visited) ||
             traverse([i - 1, j], word.slice(1), board, visited) ||
             traverse([i + 1, j], word.slice(1), board, visited)
-        );
-    } else if (board[i][j] !== word[0]) {
+        ) {
+            return true;
+        }
         visited[i][j] = false;
     }
     return false;
