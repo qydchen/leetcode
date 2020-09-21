@@ -1,5 +1,5 @@
 // Design an algorithm and write code to find the first common ancestor of two
-// nodes in a graph. Avoid storing additional nodes in a data structure.
+// nodes in a graph.
 
 // Note: I got burned by this question from a startup that was going to pay me half of what I was currently
 // making at the time
