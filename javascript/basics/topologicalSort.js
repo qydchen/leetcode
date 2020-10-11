@@ -11,13 +11,11 @@
 
                 Class C
             /           \
-    Class A                 Class J
-            \           /
-                Class D
-            /           \
-    Class B     Class E ->   Class H
-            \
-                Class F ->  Class I
+    Class A                 Class J - Class K
+            \           /           /
+                Class D            /
+                                  /
+    Class B ---------------------
 
     The only type of graph which has a valid topological ordering is a Directed Acyclic Graph
     (DAG). These are graphs with directed edges and no cycles.
@@ -32,115 +30,48 @@
         ordering in reverse order.
 */
 
-// Assume graph is stored as adjacency list
-// function topologicalSort(graph) {
-//     let n = graph.length;
-//     let v = new Array(n).fill(false);
-//     let ordering = new Array(n).fill(0);
-//     let i = n - 1;
-//     for (let at = 0; at < n; at++) {
-//         if (v[at] === false) {
-//             visitedNodes = [];
-//             dfs(at, v, visitedNodes, graph);
-//             for (let nodeId in visitedNodes) {
-//                 ordering[i] = nodeId;
-//                 i = i - 1;
-//             }
-//         }
-//     }
-//     return ordering;
-// }
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.children = [];
+    }
+}
 
-// // Execute dfs
-// function dfs(at, v, visitedNodes, graph) {
-//     v[at] = true;
-//     let edges = graph[at];
-//     for (let edge in edges) {
-//         if (V[edge.to] === false) {
-//             dfs(edge.to, v, visitedNodes, graph);
-//         }
-//     }
-//     visitedNodes.add(at);
-// }
+const topologicalSort = (edges) => {
+    // an adjacency list
+    const nodes = {}; // hash: stringified id of the node => { id: id, afters: list of ids }
+    const sorted = []; // sorted list of IDs ( returned value )
+    const visited = new Set(); // hash: id of already visited node => true
 
-// There is a neat optimization for time and space: no need for the visitedNodes array
-// function topologicalSort(graph) {
-//     let n = graph.length;
-//     let v = new Array(n).fill(false);
-//     let ordering = new Array(n).fill(0);
-//     let i = n - 1;
-//     for (let at = 0; at < n; at++) {
-//         if (v[at] === false) {
-//             i = dfs(i, at, v, ordering, graph);
-//         }
-//     }
-//     return ordering;
-// }
-
-// // Execute dfs
-// function dfs(i, at, v, ordering, graph) {
-//     v[at] = true;
-//     let edges = graph[at];
-//     for (let edge in edges) {
-//         if (V[edge.to] === false) {
-//             i = dfs(i, edge.to, v, ordering, graph);
-//         }
-//     }
-//     ordering[i] = at;
-//     return i - 1;
-// }
-
-function tsort(edges) {
-    let nodes = {}, // hash: stringified id of the node => { id: id, afters: list of ids }
-        sorted = [], // sorted list of IDs ( returned value )
-        visited = {}; // hash: id of already visited node => true
-
-    let Node = function (id) {
-        this.id = id;
-        this.afters = [];
-    };
-
-    // 1. build data structures
-    edges.forEach(function (v) {
-        let from = v[0],
-            to = v[1];
+    // 1. build the graph
+    for (let edge of edges) {
+        const [from, to] = edge;
         if (!nodes[from]) nodes[from] = new Node(from);
         if (!nodes[to]) nodes[to] = new Node(to);
-        nodes[from].afters.push(to);
-    });
+        nodes[from].children.push(to);
+    }
 
-    // 2. topological sort
-    Object.keys(nodes).forEach(function visit(idstr, ancestors) {
-        let node = nodes[idstr],
-            id = node.id;
-
-        // if already exists, do nothing
-        if (visited[idstr]) return;
-
-        if (!Array.isArray(ancestors)) ancestors = [];
-
-        ancestors.push(id);
-
-        visited[idstr] = true;
-
-        node.afters.forEach(function (afterID) {
-            if (ancestors.indexOf(afterID) >= 0)
-                // if already in ancestors, a closed chain exists.
-                throw new Error("closed chain : " + afterID + " is in " + id);
-
-            visit(
-                afterID.toString(),
-                ancestors.map(function (v) {
-                    return v;
-                })
-            ); // recursive call
-        });
-
-        sorted.unshift(id);
-    });
+    for (let nodeVal in nodes) {
+        // 2. topological sort
+        visit(nodeVal, []);
+    }
 
     return sorted;
-}
+    function visit(nodeVal, ancestors = []) {
+        const node = nodes[nodeVal];
+        const { val } = node;
+        if (visited.has(val)) return;
+        ancestors.push(val);
+        visited.add(val);
+        for (let kidVal of node.children) {
+            if (ancestors.includes(kidVal)) {
+                throw new Error("closed chain: " + kidVal + " is in " + val);
+            }
+            visit(kidVal, ancestors.slice());
+        }
+        sorted.unshift(val);
+    }
+};
 
 /**
  * TEST
@@ -154,7 +85,7 @@ function tsortTest() {
         [3, 4],
     ];
 
-    let sorted = tsort(edges);
+    let sorted = topologicalSort(edges);
     console.log(sorted);
 
     // example 2: failure ( A > B > C > A )
@@ -165,31 +96,30 @@ function tsortTest() {
     ];
 
     try {
-        sorted = tsort(edges);
+        sorted = topologicalSort(edges);
+        console.log(sorted);
     } catch (e) {
         console.log(e.message);
     }
 
-    // example 3: generate random edges
-    let max = 100,
-        iteration = 30;
-    function randomInt(max) {
-        return Math.floor(Math.random() * max) + 1;
-    }
+    //             Class C
+    //         /           \
+    // Class A                 Class J - Class K
+    //         \           /           /
+    //             Class D            /
+    //                               /
+    // Class B ---------------------
+    edges = [
+        ["ClassA", "ClassC"],
+        ["ClassA", "ClassD"],
+        ["ClassJ", "ClassK"],
+        ["ClassB", "ClassK"],
+        ["ClassC", "ClassJ"],
+        ["ClassD", "ClassJ"],
+    ];
 
-    edges = (function () {
-        let ret = [],
-            i = 0;
-        while (i++ < iteration) ret.push([randomInt(max), randomInt(max)]);
-        return ret;
-    })();
-
-    try {
-        sorted = tsort(edges);
-        console.log("succeeded", sorted);
-    } catch (e) {
-        console.log("failed", e.message);
-    }
+    sorted = topologicalSort(edges);
+    console.log(sorted);
 }
 
 tsortTest();
