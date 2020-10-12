@@ -75,3 +75,13 @@ const test1 = [
 ];
 
 console.log(numDistinctIslands(test1)); // 1
+
+const test2 = [
+    [1, 1, 0, 0, 1],
+    [1, 0, 1, 0, 1],
+    [0, 1, 1, 1, 0],
+    [1, 0, 1, 0, 1],
+    [1, 0, 0, 1, 1],
+];
+
+console.log(numDistinctIslands(test2)); // 4
