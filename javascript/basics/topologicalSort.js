@@ -120,6 +120,41 @@ function tsortTest() {
 
     sorted = topologicalSort(edges);
     console.log(sorted);
+    edges = [
+        [3, 1],
+        [8, 1],
+        [8, 7],
+        [5, 7],
+        [5, 2],
+        [1, 4],
+        [6, 7],
+        [1, 2],
+        [7, 6],
+    ];
+
+    try {
+        sorted = topologicalSort(edges);
+        console.log(sorted);
+    } catch (e) {
+        console.log(e.message);
+    }
+    edges = [
+        [1, 2],
+        [2, 3],
+        [3, 4],
+        [4, 5],
+        [5, 6],
+        [6, 7],
+        [7, 8],
+        [8, 1],
+    ];
+
+    try {
+        sorted = topologicalSort(edges);
+        console.log(sorted);
+    } catch (e) {
+        console.log(e.message);
+    }
 }
 
 tsortTest();
