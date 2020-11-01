@@ -73,13 +73,13 @@ class UnionFind {
     constructor(grid) {
         this.count = 0;
         for (let i = 0; i < grid.length; i++) {
-            for (let j = 0; j < grid[i].length; j++) {
+            const colCount = grid[i].length;
+            for (let j = 0; j < colCount; j++) {
                 if (grid[i][j] === "1") {
-                    this.parent[i * grid[i].length + j] =
-                        i * grid[i].length + j;
+                    this.parent[i * colCount + j] = i * colCount + j;
                     this.count++;
                 }
-                this.rank[i * grid[i].length + j] = 0;
+                this.rank[i * colCount + j] = 0;
             }
         }
     }
@@ -88,8 +88,7 @@ class UnionFind {
         return this.parent[i];
     }
     union(x, y) {
-        const rootx = this.find(x);
-        const rooty = this.find(y);
+        const [rootx, rooty] = [this.find(x), this.find(y)];
         if (rootx != rooty) {
             if (this.rank[rootx] > this.rank[rooty]) {
                 this.parent[rooty] = rootx;
@@ -101,6 +100,8 @@ class UnionFind {
             }
             this.count--;
         }
+        console.log(this.rank);
+        console.log(this.parent);
     }
     getCount() {
         return this.count;
@@ -108,122 +109,34 @@ class UnionFind {
 }
 
 const numberOfIslands2 = (grid) => {
-    if (grid === null || grid.length === 0) return 0;
-    const unionFind = new UnionFind(grid);
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
+    const uf = new UnionFind(grid);
+    const rowCount = grid.length;
+    for (let i = 0; i < rowCount; i++) {
+        const colCount = grid[i].length;
+        for (let j = 0; j < colCount; j++) {
             if (grid[i][j] === "1") {
                 grid[i][j] = "0";
+                // Look up
                 if (i - 1 >= 0 && grid[i - 1][j] === "1") {
-                    unionFind.union(
-                        i * grid[i].length + j,
-                        (i - 1) * grid[i].length + j
-                    );
+                    uf.union(i * colCount + j, (i - 1) * colCount + j);
                 }
-                if (i + 1 < grid.length && grid[i + 1][j] === "1") {
-                    unionFind.union(
-                        i * grid[i].length + j,
-                        (i + 1) * grid[i].length + j
-                    );
+                // Look down
+                if (i + 1 < rowCount && grid[i + 1][j] === "1") {
+                    uf.union(i * colCount + j, (i + 1) * colCount + j);
                 }
+                // Look left
                 if (j - 1 >= 0 && grid[i][j - 1] === "1") {
-                    unionFind.union(
-                        i * grid[i].length + j,
-                        i * grid[i].length + j - 1
-                    );
+                    uf.union(i * colCount + j, i * colCount + j - 1);
                 }
-                if (j + 1 < grid[i].length && grid[i][j + 1] === "1") {
-                    unionFind.union(
-                        i * grid[i].length + j,
-                        i * grid[i].length + j + 1
-                    );
+                // Look right
+                if (j + 1 < colCount && grid[i][j + 1] === "1") {
+                    uf.union(i * colCount + j, i * colCount + j + 1);
                 }
             }
         }
     }
-    return unionFind.getCount();
+    return uf.getCount();
 };
 
-console.log(numberOfIslands2(grid1));
+// console.log(numberOfIslands2(grid1));
 console.log(numberOfIslands2(grid2));
-//   public int numIslands(char[][] grid) {
-//     if (grid == null || grid.length == 0) {
-//       return 0;
-//     }
-
-//     int nr = grid.length;
-//     int nc = grid[0].length;
-//     int num_islands = 0;
-//     UnionFind uf = new UnionFind(grid);
-//     for (int r = 0; r < nr; ++r) {
-//       for (int c = 0; c < nc; ++c) {
-//         if (grid[r][c] == '1') {
-//           grid[r][c] = '0';
-//           if (r - 1 >= 0 && grid[r-1][c] == '1') {
-//             uf.union(r * nc + c, (r-1) * nc + c);
-//           }
-//           if (r + 1 < nr && grid[r+1][c] == '1') {
-//             uf.union(r * nc + c, (r+1) * nc + c);
-//           }
-//           if (c - 1 >= 0 && grid[r][c-1] == '1') {
-//             uf.union(r * nc + c, r * nc + c - 1);
-//           }
-//           if (c + 1 < nc && grid[r][c+1] == '1') {
-//             uf.union(r * nc + c, r * nc + c + 1);
-//           }
-//         }
-//       }
-//     }
-
-//     return uf.getCount();
-//   }
-
-// class Solution {
-//   class UnionFind {
-//     int count; // # of connected components
-//     int[] parent;
-//     int[] rank;
-
-//     public UnionFind(char[][] grid) { // for problem 200
-//       count = 0;
-//       int m = grid.length;
-//       int n = grid[0].length;
-//       parent = new int[m * n];
-//       rank = new int[m * n];
-//       for (int i = 0; i < m; ++i) {
-//         for (int j = 0; j < n; ++j) {
-//           if (grid[i][j] == '1') {
-//             parent[i * n + j] = i * n + j;
-//             ++count;
-//           }
-//           rank[i * n + j] = 0;
-//         }
-//       }
-//     }
-
-//     public int find(int i) { // path compression
-//       if (parent[i] != i) parent[i] = find(parent[i]);
-//       return parent[i];
-//     }
-
-//     public void union(int x, int y) { // union with rank
-//       int rootx = find(x);
-//       int rooty = find(y);
-//       if (rootx != rooty) {
-//         if (rank[rootx] > rank[rooty]) {
-//           parent[rooty] = rootx;
-//         } else if (rank[rootx] < rank[rooty]) {
-//           parent[rootx] = rooty;
-//         } else {
-//           parent[rooty] = rootx; rank[rootx] += 1;
-//         }
-//         --count;
-//       }
-//     }
-
-//     public int getCount() {
-//       return count;
-//     }
-//   }
-
-// }
