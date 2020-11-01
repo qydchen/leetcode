@@ -68,10 +68,10 @@ const traverse = (grid, i, j, visited) => {
 // console.log(numberOfIslands(grid2));
 
 class UnionFind {
-    parent = [];
-    rank = [];
     constructor(grid) {
         this.count = 0;
+        this.parent = Array(grid.length * grid[0].length);
+        this.rank = Array(grid.length * grid[0].length);
         for (let i = 0; i < grid.length; i++) {
             const colCount = grid[i].length;
             for (let j = 0; j < colCount; j++) {
