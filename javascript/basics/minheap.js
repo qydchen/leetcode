@@ -47,25 +47,71 @@ class MinHeap {
         }
     }
 
-    siftDown() {}
+    siftDown() {
+        let i = 0;
+        let l = i * 2 + 1;
+        let r = i * 2 + 2;
+        while (this.heap[l] !== undefined) {
+            let s = l;
+            if (this.heap[r] !== undefined && this.heap[r] < this.heap[l]) {
+                s = r;
+            }
 
-    siftUp() {}
+            if (this.heap[i] < this.heap[s]) {
+                return;
+            } else {
+                [this.heap[i], this.heap[s]] = [this.heap[s], this.heap[i]];
+                i = s;
+                l = i * 2 + 1;
+                r = i * 2 + 2;
+            }
+        }
+    }
+
+    siftUp() {
+        let i = this.heap.length - 1;
+        let p = Math.floor(i / 2 - 1);
+        while (this.heap[i] < this.heap[p]) {
+            [this.heap[i], this.heap[p]] = [this.heap[p], this.heap[i]];
+            i = p;
+            p = Math.floor(i / 2) - 1;
+        }
+    }
 
     peek() {
         return this.heap[0];
     }
 
-    remove() {}
+    poll() {
+        let polled = this.heap[0];
+        this.heap[0] = this.heap[this.heap.length - 1];
+        this.siftDown();
+        this.heap = this.heap.slice(0, -1);
+        return polled;
+    }
 
     insert(value) {
         this.heap.push(value);
-        this.heap.siftUp();
+        this.siftUp();
     }
 }
 
-const myHeap = new MinHeap([9, 8, 5, 1, 2, 6, 11, 15, 24, 12, 33, 21, 7]);
-console.log(myHeap.heap);
-//   0 1 2 3 4 5  6  7  8  9 10 11 12
+const myHeap = new MinHeap([5, 4, 3, 2, 1]);
+// console.log(myHeap.heap);
+myHeap.insert(99);
+// console.log(myHeap.heap);
+myHeap.insert(-1);
+console.log(JSON.stringify(myHeap.heap));
+myHeap.poll();
+console.log(JSON.stringify(myHeap.heap));
+myHeap.poll();
+console.log(JSON.stringify(myHeap.heap));
+myHeap.poll();
+console.log(JSON.stringify(myHeap.heap));
+while (myHeap.heap.length) {
+    myHeap.poll();
+    console.log(JSON.stringify(myHeap.heap));
+}
 
 // Priority Queue
 // A ADT that operates similar to a normal queue except that each element has a certain
