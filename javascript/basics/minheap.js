@@ -24,18 +24,48 @@ class MinHeap {
         this.heap = this.buildHeap(array);
     }
 
-    buildHeap(array) {}
+    buildHeap(array) {
+        for (let i = array.length - 1; i >= 0; i--) {
+            this.heapify(array, i);
+        }
+        return array;
+    }
+
+    heapify(array, i) {
+        let smallest = i;
+        let l = 2 * i + 1;
+        let r = 2 * i + 2;
+        if (array[l] < array[smallest] && l < array.length) {
+            smallest = l;
+        }
+        if (array[r] < array[smallest] && r < array.length) {
+            smallest = r;
+        }
+        if (smallest !== i) {
+            [array[i], array[smallest]] = [array[smallest], array[i]];
+            this.heapify(array, smallest);
+        }
+    }
 
     siftDown() {}
 
     siftUp() {}
 
-    peek() {}
+    peek() {
+        return this.heap[0];
+    }
 
     remove() {}
 
-    insert(value) {}
+    insert(value) {
+        this.heap.push(value);
+        this.heap.siftUp();
+    }
 }
+
+const myHeap = new MinHeap([9, 8, 5, 1, 2, 6, 11, 15, 24, 12, 33, 21, 7]);
+console.log(myHeap.heap);
+//   0 1 2 3 4 5  6  7  8  9 10 11 12
 
 // Priority Queue
 // A ADT that operates similar to a normal queue except that each element has a certain
