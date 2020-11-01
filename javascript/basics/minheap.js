@@ -32,6 +32,7 @@ class MinHeap {
     }
 
     heapify(array, i) {
+        // O(N)
         let smallest = i;
         let l = 2 * i + 1;
         let r = 2 * i + 2;
@@ -91,6 +92,7 @@ class MinHeap {
     }
 
     insert(value) {
+        // O(logN)
         this.heap.push(value);
         this.siftUp();
     }
