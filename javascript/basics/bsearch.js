@@ -63,13 +63,15 @@ assert.strictEqual(
 assert.strictEqual(iterativeBsearch([1, 3, 4, 5, 6, 8, 9], 3), 1); // => 1
 assert.strictEqual(iterativeBsearch([], 0), -1); // => -1
 assert.strictEqual(iterativeBsearch([1, 3, 7, 8, 88, 99, 100], 100), 6); // => 6
+assert.strictEqual(iterativeBsearch([5], 5), 0);
 
 function iterativeBsearch2(array, target) {
+    // Failing some cases
     let left = 0;
     let right = array.length - 1;
     while (left < right) {
-        let mid = Math.floor((right - left) / 2) + 1 + left;
-        // let mid = Math.floor(left + (right - left) / 2) + 1;
+        // let mid = Math.floor((right - left) / 2) + 1 + left;
+        let mid = Math.floor(left + (right - left) / 2) + 1;
         // let mid = Math.floor((right + left) / 2) + 1;
         if (array[mid] === target) {
             return mid;
@@ -93,3 +95,4 @@ assert.strictEqual(
 assert.strictEqual(iterativeBsearch2([1, 3, 4, 5, 6, 8, 9], 3), 1); // => 1
 assert.strictEqual(iterativeBsearch2([], 0), -1); // => -1
 assert.strictEqual(iterativeBsearch2([1, 3, 7, 8, 88, 99, 100], 100), 6); // => 6
+assert.strictEqual(iterativeBsearch2([5], 5), 0);
