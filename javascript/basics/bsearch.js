@@ -52,6 +52,23 @@ function iterativeBsearch(array, target) {
     return -1;
 }
 
+// Another working solution wiht array.length with a -1
+// function iterativeBsearch(array, target) {
+//     let left = 0;
+//     let right = array.length - 1;
+//     while (left < right) {
+//         let mid = Math.floor((right - left) / 2) + left;
+//         if (array[mid] === target) {
+//             return mid;
+//         } else if (array[mid] < target) {
+//             left = mid + 1;
+//         } else {
+//             right = mid - 1;
+//         }
+//     }
+//     return -1;
+// }
+
 assert.strictEqual(
     iterativeBsearch([2, 4, 6, 7, 8, 10, 13, 15, 17, 19, 20], 19),
     9
@@ -65,8 +82,8 @@ assert.strictEqual(iterativeBsearch([], 0), -1); // => -1
 assert.strictEqual(iterativeBsearch([1, 3, 7, 8, 88, 99, 100], 100), 6); // => 6
 assert.strictEqual(iterativeBsearch([5], 5), 0);
 
+// Failing some cases
 function iterativeBsearch2(array, target) {
-    // Failing some cases
     let left = 0;
     let right = array.length - 1;
     while (left < right) {
