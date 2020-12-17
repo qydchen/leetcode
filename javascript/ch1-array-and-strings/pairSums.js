@@ -35,3 +35,22 @@ function numberOfWays(arr, target) {
 }
 
 console.log(numberOfWays([1, 2, 3, 4, 3], 6)); // 2
+
+function numberOfWays2(arr, target) {
+  let map = new Map();
+  let count = 0;
+  for (let num of arr) {
+    if (map.has(num)) count += map.get(num);
+    if (!map.has(target - num)) {
+      map.set(target - num, 1);
+    } else {
+      map.set(target - num, map.get(target - num) + 1);
+    }
+  }
+  return count;
+}
+
+console.log(numberOfWays2([1, 2, 3, 4, 3], 6)); // 2
+// {5, 4 , 3 , 2,}
+
+console.log(numberOfWays2([1, 5, 3, 3, 3], 6)); // 4
