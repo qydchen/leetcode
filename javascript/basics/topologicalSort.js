@@ -31,130 +31,130 @@
 */
 
 class Node {
-    constructor(val) {
-        this.val = val;
-        this.children = [];
-    }
+  constructor(val) {
+    this.val = val;
+    this.children = [];
+  }
 }
 
 const topologicalSort = (edges) => {
-    // an adjacency list
-    const nodes = {}; // hash: stringified id of the node => { id: id, afters: list of ids }
-    const sorted = []; // sorted list of IDs ( returned value )
-    const visited = new Set(); // hash: id of already visited node => true
+  // an adjacency list
+  const nodes = {}; // hash: stringified id of the node => { id: id, afters: list of ids }
+  const sorted = []; // sorted list of IDs ( returned value )
+  const visited = new Set(); // hash: id of already visited node => true
 
-    // 1. build the graph
-    for (let edge of edges) {
-        const [from, to] = edge;
-        if (!nodes[from]) nodes[from] = new Node(from);
-        if (!nodes[to]) nodes[to] = new Node(to);
-        nodes[from].children.push(to);
-    }
+  // 1. build the graph
+  for (let edge of edges) {
+    const [from, to] = edge;
+    if (!nodes[from]) nodes[from] = new Node(from);
+    if (!nodes[to]) nodes[to] = new Node(to);
+    nodes[from].children.push(to);
+  }
 
-    for (let nodeVal in nodes) {
-        // 2. topological sort
-        visit(nodeVal, []);
-    }
+  for (let nodeVal in nodes) {
+    // 2. topological sort
+    visit(nodeVal, []);
+  }
 
-    return sorted;
-    function visit(nodeVal, ancestors = []) {
-        const node = nodes[nodeVal];
-        const { val } = node;
-        if (visited.has(val)) return;
-        ancestors.push(val);
-        visited.add(val);
-        for (let kidVal of node.children) {
-            if (ancestors.includes(kidVal)) {
-                throw new Error("closed chain: " + kidVal + " is in " + val);
-            }
-            visit(kidVal, ancestors.slice());
-        }
-        sorted.unshift(val);
+  return sorted;
+  function visit(nodeVal, ancestors = []) {
+    const node = nodes[nodeVal];
+    const { val } = node;
+    if (visited.has(val)) return;
+    ancestors.push(val);
+    visited.add(val);
+    for (let kidVal of node.children) {
+      if (ancestors.includes(kidVal)) {
+        throw new Error('closed chain: ' + kidVal + ' is in ' + val);
+      }
+      visit(kidVal, ancestors.slice());
     }
+    sorted.unshift(val);
+  }
 };
 
 /**
  * TEST
  **/
 function tsortTest() {
-    // example 1: success
-    let edges = [
-        [1, 2],
-        [1, 3],
-        [2, 4],
-        [3, 4],
-    ];
+  // example 1: success
+  let edges = [
+    [1, 2],
+    [1, 3],
+    [2, 4],
+    [3, 4],
+  ];
 
-    let sorted = topologicalSort(edges);
-    console.log(sorted);
+  let sorted = topologicalSort(edges);
+  console.log(sorted);
 
-    // example 2: failure ( A > B > C > A )
-    edges = [
-        ["A", "B"],
-        ["B", "C"],
-        ["C", "A"],
-    ];
+  // example 2: failure ( A > B > C > A )
+  edges = [
+    ['A', 'B'],
+    ['B', 'C'],
+    ['C', 'A'],
+  ];
 
-    try {
-        sorted = topologicalSort(edges);
-        console.log(sorted);
-    } catch (e) {
-        console.log(e.message);
-    }
-
-    //             Class C
-    //         /           \
-    // Class A                 Class J - Class K
-    //         \           /           /
-    //             Class D            /
-    //                               /
-    // Class B ---------------------
-    edges = [
-        ["ClassA", "ClassC"],
-        ["ClassA", "ClassD"],
-        ["ClassJ", "ClassK"],
-        ["ClassB", "ClassK"],
-        ["ClassC", "ClassJ"],
-        ["ClassD", "ClassJ"],
-    ];
-
+  try {
     sorted = topologicalSort(edges);
     console.log(sorted);
-    edges = [
-        [3, 1],
-        [8, 1],
-        [8, 7],
-        [5, 7],
-        [5, 2],
-        [1, 4],
-        [6, 7],
-        [1, 2],
-        [7, 6],
-    ];
+  } catch (e) {
+    console.log(e.message);
+  }
 
-    try {
-        sorted = topologicalSort(edges);
-        console.log(sorted);
-    } catch (e) {
-        console.log(e.message);
-    }
-    edges = [
-        [1, 2],
-        [2, 3],
-        [3, 4],
-        [4, 5],
-        [5, 6],
-        [6, 7],
-        [7, 8],
-        [8, 1],
-    ];
+  //             Class C
+  //         /           \
+  // Class A                 Class J - Class K
+  //         \           /           /
+  //             Class D            /
+  //                               /
+  // Class B ---------------------
+  edges = [
+    ['ClassA', 'ClassC'],
+    ['ClassA', 'ClassD'],
+    ['ClassJ', 'ClassK'],
+    ['ClassB', 'ClassK'],
+    ['ClassC', 'ClassJ'],
+    ['ClassD', 'ClassJ'],
+  ];
 
-    try {
-        sorted = topologicalSort(edges);
-        console.log(sorted);
-    } catch (e) {
-        console.log(e.message);
-    }
+  sorted = topologicalSort(edges);
+  console.log(sorted);
+  edges = [
+    [3, 1],
+    [8, 1],
+    [8, 7],
+    [5, 7],
+    [5, 2],
+    [1, 4],
+    [6, 7],
+    [1, 2],
+    [7, 6],
+  ];
+
+  try {
+    sorted = topologicalSort(edges);
+    console.log(sorted);
+  } catch (e) {
+    console.log(e.message);
+  }
+  edges = [
+    [1, 2],
+    [2, 3],
+    [3, 4],
+    [4, 5],
+    [5, 6],
+    [6, 7],
+    [7, 8],
+    [8, 1],
+  ];
+
+  try {
+    sorted = topologicalSort(edges);
+    console.log(sorted);
+  } catch (e) {
+    console.log(e.message);
+  }
 }
 
 tsortTest();
