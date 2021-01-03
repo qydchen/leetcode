@@ -1,7 +1,7 @@
+// Time: O(nlog(n)); Space O(nlog(n))
+
 function mergeSort(array) {
-  if (array.length <= 1) {
-    return array;
-  }
+  if (array.length <= 1) return array;
   let mid = Math.floor(array.length / 2);
   let left = mergeSort(array.slice(0, mid));
   let right = mergeSort(array.slice(mid));
@@ -25,4 +25,4 @@ function merged(left, right) {
 }
 
 console.log(mergeSort([5, 4, 3, 1, 2]));
-console.log(mergeSort([55, 123, 151, 6212, 7, 14, 13, 78, 1, 99]));
+// console.log(mergeSort([55, 123, 151, 6212, 7, 14, 13, 78, 1, 99]));

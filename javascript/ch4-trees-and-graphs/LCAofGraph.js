@@ -40,49 +40,51 @@ in the Euler tour, and only n nodes in total, so a perfect 1 to 1 inverse mappin
 // the minimum is 1, and that corresponds to c, which is the LCA
 
 class GraphNode {
-    constructor(val) {
-        this.val = val;
-        this.children = [];
-    }
+  constructor(val) {
+    this.val = val;
+    this.children = [];
+  }
 }
 
 function LCA(root, node1, node2) {
-    const eulerTourNodes = [];
-    const depth = [];
-    let node1EulerTourIdx;
-    let node2EulerTourIdx;
-    let tourIndex = 0;
-    const dfs = (_root, nodeDepth) => {
-        if (_root === null) return null;
-        if (_root === node1) {
-            node1EulerTourIdx = tourIndex;
-        }
-        if (_root === node2) {
-            node2EulerTourIdx = tourIndex;
-        }
-        visit(_root, nodeDepth);
-        for (let child of _root.children) {
-            dfs(child, nodeDepth + 1);
-            visit(_root, nodeDepth);
-        }
-    };
-    const visit = (_node, nodeDepth) => {
-        eulerTourNodes[tourIndex] = _node;
-        depth[tourIndex] = nodeDepth;
-        tourIndex++;
-    };
-    dfs(root, 0);
-
-    // This could have been optimized by using a sparse table to get constant time min
-    let min = null;
-    let minIdx;
-    for (let i = node1EulerTourIdx; i <= node2EulerTourIdx; i += 1) {
-        if (min === null || depth[i] < min) {
-            min = depth[i];
-            minIdx = i;
-        }
+  const eulerTourNodes = [];
+  const depth = [];
+  let node1EulerTourIdx;
+  let node2EulerTourIdx;
+  let tourIndex = 0;
+  const dfs = (_root, nodeDepth) => {
+    if (_root === null) return null;
+    if (_root === node1) {
+      node1EulerTourIdx = tourIndex;
     }
-    return eulerTourNodes[minIdx];
+    if (_root === node2) {
+      node2EulerTourIdx = tourIndex;
+    }
+    visit(_root, nodeDepth);
+    for (let child of _root.children) {
+      dfs(child, nodeDepth + 1);
+      visit(_root, nodeDepth);
+    }
+  };
+  const visit = (_node, nodeDepth) => {
+    eulerTourNodes[tourIndex] = _node;
+    depth[tourIndex] = nodeDepth;
+    tourIndex++;
+  };
+  dfs(root, 0);
+
+  // This could have been optimized by using a sparse table to get constant time min
+  let min = null;
+  let minIdx;
+  for (let i = node1EulerTourIdx; i <= node2EulerTourIdx; i += 1) {
+    if (min === null || depth[i] < min) {
+      min = depth[i];
+      minIdx = i;
+    }
+  }
+  console.log(eulerTourNodes.map((e) => e.val));
+  console.log(depth);
+  return eulerTourNodes[minIdx];
 }
 
 const a = new GraphNode("a");
