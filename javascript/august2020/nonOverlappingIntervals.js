@@ -24,65 +24,51 @@ Explanation: You don't need to remove any of the intervals since they're already
  * @return {number}
  */
 const eraseOverlapIntervals = function (intervals) {
-    // let count = 0,
-    //     first = null,
-    //     last = null;
-    // for (let interval of intervals) {
-    //     if (!first && !last) {
-    //         [first, last] = interval;
-    //         continue;
-    //     }
-    //     if (first === interval[1]) {
-    //         first = interval[0];
-    //         continue;
-    //     }
-    //     if (last === interval[0]) {
-    //         last = interval[1];
-    //         continue;
-    //     }
-    //     if (
-    //         (first >= interval[0] && first <= interval[1]) ||
-    //         (last >= interval[0] && last <= interval[1])
-    //     ) {
-    //         console.log(first, last, interval);
-    //         count += 1;
-    //     }
-    // }
-    // return count;
+  intervals.sort((a, b) => a[1] - b[1]); // ascending order wrt the end
+  let pre = null;
+  let counter = 0;
+  intervals.forEach((item) => {
+    if (!pre) pre = item;
+    else {
+      if (pre[1] > item[0]) counter++;
+      else pre = item;
+    }
+  });
+  return counter;
 };
 
 const t1 = [
-    [1, 2],
-    [2, 3],
-    [3, 4],
-    [1, 3],
+  [1, 2],
+  [2, 3],
+  [3, 4],
+  [1, 3],
 ];
 
-// assert.equal(eraseOverlapIntervals(t1), 1);
-
-// assert.equal(
-//     eraseOverlapIntervals([
-//         [1, 2],
-//         [1, 2],
-//         [1, 2],
-//     ]),
-//     2
-// );
-
-// assert.equal(
-//     eraseOverlapIntervals([
-//         [1, 2],
-//         [2, 3],
-//     ]),
-//     0
-// );
+assert.equal(eraseOverlapIntervals(t1), 1);
 
 assert.equal(
-    eraseOverlapIntervals([
-        [1, 100],
-        [11, 22],
-        [1, 11],
-        [2, 12],
-    ]),
-    2
+  eraseOverlapIntervals([
+    [1, 2],
+    [1, 2],
+    [1, 2],
+  ]),
+  2
+);
+
+assert.equal(
+  eraseOverlapIntervals([
+    [1, 2],
+    [2, 3],
+  ]),
+  0
+);
+
+assert.equal(
+  eraseOverlapIntervals([
+    [1, 100],
+    [11, 22],
+    [1, 11],
+    [2, 12],
+  ]),
+  2
 );
