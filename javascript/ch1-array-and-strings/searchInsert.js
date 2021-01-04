@@ -19,7 +19,7 @@
 // Input: [1,3,5,6], 0
 // Output: 0
 
-const searchInsert = function(nums, target) {
+const searchInsert = function (nums, target) {
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] === target) {
       return i;
