@@ -25,12 +25,12 @@ Whenever we're at a new index, we are trying to look for a maximum sum ending at
 */
 
 function kadanesAlgorithm(array) {
-    if (!array.length) return null;
-    let runningMax = array[0];
-    let largestMax = array[0];
-    for (let num of array.slice(1)) {
-        runningMax = Math.max(runningMax + num, num);
-        largestMax = Math.max(largestMax, runningMax);
-    }
-    return largestMax;
+  if (!array.length) return null;
+  let runningMax = array[0];
+  let largestMax = array[0];
+  for (let num of array.slice(1)) {
+    runningMax = Math.max(runningMax + num, num);
+    largestMax = Math.max(largestMax, runningMax);
+  }
+  return largestMax;
 }
