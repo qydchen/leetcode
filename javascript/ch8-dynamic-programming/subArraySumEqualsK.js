@@ -5,11 +5,12 @@ const subarraySum = function (nums, k) {
   for (let num of nums) {
     console.log("------");
     sum = sum + num;
-    console.log(sum - k);
+    console.log("current running sum", sum);
+    console.log("checking map:", map[sum - k], "sum - k:", sum - k);
     total += map[sum - k] || 0;
-    console.log(total);
+    console.log("current total", total);
     map[sum] = (map[sum] || 0) + 1;
-    console.log(map);
+    console.log("saving sum into map", map);
   }
   return total;
 };
