@@ -25,4 +25,37 @@
 // Positive/negative sign - "+"/"-"
 // Decimal point - "."
 // Of course, the context of these characters also matters in the input.
-const isNumber = (s) => !isNaN(Number(s)) && s.trim() !== "";
+
+const isNumber1 = (s) => !isNaN(Number(s)) && s.trim() !== "";
+
+const signs = ["+", "-"];
+const isNumber2 = function (s) {
+  s = s.trim();
+  if (s.length === 0) return false;
+
+  const splits = s.split("e");
+  if (splits.length === 0 || splits.length > 2) return false;
+  if (splits.some((split) => split.length === 0)) return false;
+
+  for (let i = 0; i < splits.length; i++) {
+    const str = signs.includes(splits[i][0])
+      ? splits[i].substring(1)
+      : splits[i];
+    let decimalFound = false;
+    let numberFound = false;
+    for (const ch of str) {
+      if (ch === ".") {
+        if (decimalFound || i === 1) return false;
+        decimalFound = true;
+      } else if (Number.isNaN(Number.parseInt(ch))) {
+        return false;
+      } else {
+        numberFound = true;
+      }
+    }
+
+    if (!numberFound) return false;
+  }
+
+  return true;
+};

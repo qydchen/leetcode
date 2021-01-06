@@ -82,42 +82,42 @@ Output:
  */
 
 class Node {
-    constructor(val) {
-        this.val = val;
-        this.left = this.right = null;
-    }
+  constructor(val) {
+    this.val = val;
+    this.left = this.right = null;
+  }
 }
 const verticalOrder = function (root) {
-    if (!root) return [];
-    let columnMap = {};
-    const mid = getDistanceFromLeft(root);
-    populateColumnMap(root, columnMap, mid);
-    let arr = [];
-    for (let colIdx in columnMap) {
-        arr[colIdx] = columnMap[colIdx]
-            .sort((a, b) => a.depth - b.depth)
-            .map(({ val }) => val);
-    }
-    return arr;
+  if (!root) return [];
+  let columnMap = {};
+  const mid = getDistanceFromLeft(root);
+  populateColumnMap(root, columnMap, mid);
+  let arr = [];
+  for (let colIdx in columnMap) {
+    arr[colIdx] = columnMap[colIdx]
+      .sort((a, b) => a.depth - b.depth)
+      .map(({ val }) => val);
+  }
+  return arr;
 };
 
 const getDistanceFromLeft = (node) => {
-    if (!node) return -1;
-    return Math.max(
-        getDistanceFromLeft(node.left) + 1,
-        getDistanceFromLeft(node.right) - 1
-    );
+  if (!node) return -1;
+  return Math.max(
+    getDistanceFromLeft(node.left) + 1,
+    getDistanceFromLeft(node.right) - 1
+  );
 };
 
 const populateColumnMap = (node, map, idx, depth = 0) => {
-    if (!node) return;
-    if (!map[idx]) {
-        map[idx] = [{ val: node.val, depth }];
-    } else {
-        map[idx].push({ val: node.val, depth });
-    }
-    populateColumnMap(node.left, map, idx - 1, depth + 1);
-    populateColumnMap(node.right, map, idx + 1, depth + 1);
+  if (!node) return;
+  if (!map[idx]) {
+    map[idx] = [{ val: node.val, depth }];
+  } else {
+    map[idx].push({ val: node.val, depth });
+  }
+  populateColumnMap(node.left, map, idx - 1, depth + 1);
+  populateColumnMap(node.right, map, idx + 1, depth + 1);
 };
 
 //      3
