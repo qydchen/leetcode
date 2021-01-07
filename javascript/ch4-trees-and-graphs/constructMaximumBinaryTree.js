@@ -20,24 +20,24 @@
 // The size of the given array will be in the range [1,1000].
 
 function TreeNode(val) {
-    this.val = val;
-    this.left = this.right = null;
+  this.val = val;
+  this.left = this.right = null;
 }
 
 function constructMaximumBinaryTree(nums) {
-    let max = null;
-    let pivotIdx = 0;
-    let newNode = null;
-    for (let i = 0; i < nums.length; i++) {
-        if (max === null || max < nums[i]) {
-            max = nums[i];
-            pivotIdx = i;
-        }
+  let max = null;
+  let pivotIdx = 0;
+  let newNode = null;
+  for (let i = 0; i < nums.length; i++) {
+    if (max === null || max < nums[i]) {
+      max = nums[i];
+      pivotIdx = i;
     }
-    if (max !== null) {
-        newNode = new TreeNode(max);
-        newNode.left = constructMaximumBinaryTree(nums.slice(0, pivotIdx));
-        newNode.right = constructMaximumBinaryTree(nums.slice(pivotIdx + 1));
-    }
-    return newNode;
-};
+  }
+  if (max !== null) {
+    newNode = new TreeNode(max);
+    newNode.left = constructMaximumBinaryTree(nums.slice(0, pivotIdx));
+    newNode.right = constructMaximumBinaryTree(nums.slice(pivotIdx + 1));
+  }
+  return newNode;
+}

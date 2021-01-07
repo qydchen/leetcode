@@ -1,21 +1,23 @@
 let board1 = [
-  ["X","O",""],
-  ["X","O",""],
-  ["O","X",""]];
+  ["X", "O", ""],
+  ["X", "O", ""],
+  ["O", "X", ""],
+];
+
 let board2 = [
-  ["X","O",""],
-  ["X","O",""],
-  ["X","","O"]
+  ["X", "O", ""],
+  ["X", "O", ""],
+  ["X", "", "O"],
 ];
 let board3 = [
-  ["X","O","X"],
-  ["X","O","O"],
-  ["O","X","O"]
+  ["X", "O", "X"],
+  ["X", "O", "O"],
+  ["O", "X", "O"],
 ];
 let board4 = [
-  ["O","O","X"],
-  ["X","O","X"],
-  ["O","X","O"]
+  ["O", "O", "X"],
+  ["X", "O", "X"],
+  ["O", "X", "O"],
 ];
 
 function isSolved(board) {
@@ -24,23 +26,23 @@ function isSolved(board) {
   for (let i = 0; i < possibleWins.length; i++) {
     const possibleWin = possibleWins[i];
     if (!stillPlaying) {
-      stillPlaying = possibleWin.some(mark => mark === "");
+      stillPlaying = possibleWin.some((mark) => mark === "");
     }
-    const xWon = possibleWin.every(mark => mark === 'X');
-    const oWon = possibleWin.every(mark => mark === 'O');
+    const xWon = possibleWin.every((mark) => mark === "X");
+    const oWon = possibleWin.every((mark) => mark === "O");
     if (xWon) {
-      return 'X';
+      return "X";
     } else if (oWon) {
-      return 'O';
+      return "O";
     }
   }
-  return stillPlaying ? 'Still in progress' : 'Draw';
+  return stillPlaying ? "Still in progress" : "Draw";
 }
 
 function getPossibleWins(board) {
   const getMark = (row, col) => board[row][col];
-  const horizontal = [[],[],[]];
-  const vertical = [[],[],[]];
+  const horizontal = [[], [], []];
+  const vertical = [[], [], []];
   const downdiag = [];
   const updiag = [];
   for (let i = 0; i < board.length; i++) {
@@ -53,7 +55,6 @@ function getPossibleWins(board) {
   }
   return horizontal.concat(vertical, [updiag, downdiag]);
 }
-
 
 console.log(isSolved(board1));
 console.log(isSolved(board2));
