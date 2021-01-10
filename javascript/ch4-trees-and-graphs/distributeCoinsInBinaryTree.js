@@ -1,3 +1,4 @@
+let Node = require("./node");
 // You are given the root of a binary tree with n nodes where each node in the tree has
 // node.val coins and there are n coins total.
 
@@ -51,3 +52,9 @@ const distributeCoins = function (root) {
 
   return moves;
 };
+
+let root = new Node(1);
+root.left = new Node(0);
+root.right = new Node(0);
+root.left.right = new Node(3);
+console.log(distributeCoins(root));
