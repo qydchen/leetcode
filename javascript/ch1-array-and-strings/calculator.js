@@ -20,6 +20,9 @@ function calculate(s) {
   let number = 0;
   let previousSign = "+";
   for (let i = 0; i < s.length; i++) {
+    console.log("----");
+    console.log(previousSign);
+    console.log(stack);
     const character = s[i];
     if (!isNaN(character) && character !== " ")
       number = number * 10 + Number(character);
@@ -46,3 +49,6 @@ function calculate(s) {
   }
   return stack.reduce((a, b) => a + b);
 }
+
+console.log(calculate("3+2*2"));
+console.log(calculate("3+5/2"));
