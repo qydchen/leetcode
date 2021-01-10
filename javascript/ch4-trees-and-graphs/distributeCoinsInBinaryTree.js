@@ -39,12 +39,21 @@ const distributeCoins = function (root) {
 
   const traverseTree = (node) => {
     if (!node) return 0;
-
     const left = traverseTree(node.left);
     const right = traverseTree(node.right);
-
     moves += Math.abs(left) + Math.abs(right);
-
+    console.log("---");
+    console.log("moves", Math.abs(left), Math.abs(right));
+    console.log(
+      "left:",
+      left,
+      "right:",
+      right,
+      "node",
+      node.val,
+      "recurse",
+      left + right + node.val - 1
+    );
     return left + right + node.val - 1;
   };
 
@@ -52,6 +61,10 @@ const distributeCoins = function (root) {
 
   return moves;
 };
+
+//    1
+//  0   0
+//   3
 
 let root = new Node(1);
 root.left = new Node(0);
