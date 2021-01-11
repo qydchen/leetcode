@@ -2,7 +2,7 @@
 //     /  \
 //    2    4
 //   / \
-//  1  3
+//  1   3
 
 class Node {
   constructor(val) {
