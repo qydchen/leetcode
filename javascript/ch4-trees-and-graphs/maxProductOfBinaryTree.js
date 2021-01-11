@@ -24,25 +24,28 @@ let Node = require("./node");
 // Output: 1
 
 const MOD = 1e9 + 7;
-// do a post-order traversal, and fill up the runningSums array, while gathering the total
+// Insight: do a post-order traversal, and fill up the postOrderSums array, while gathering the total
 // iterate over each running sum, and multiply it by the total - the current running sum
 
 var maxProduct = function (root) {
-  let runningSums = [];
+  let postOrderSums = [];
   let total = 0;
   const traverse = (node) => {
     if (!node) return 0;
     let leftSum = traverse(node.left);
     let rightSum = traverse(node.right);
     let sum = leftSum + rightSum + node.val;
-    runningSums.push(sum);
+    console.log(postOrderSums, sum);
+    postOrderSums.push(sum);
+    console.log(total, "+", node.val);
+    console.log();
     total += node.val;
     return sum;
   };
   traverse(root);
   let max = 0;
-  for (let i = 0; i < runningSums.length; i++) {
-    let totalOfSubTree = runningSums[i];
+  for (let i = 0; i < postOrderSums.length; i++) {
+    let totalOfSubTree = postOrderSums[i];
     let totalOfOtherSubTree = total - totalOfSubTree;
     max = Math.max(totalOfSubTree * totalOfOtherSubTree, max);
   }
