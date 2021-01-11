@@ -1,7 +1,7 @@
 // Implement a function to check if a binary tree is balanced. For the purposes of
 // this question, a balanced tree is defined to be a tree such that the heights of
 // the two subtrees of any node never differ by more than one.
-const { ans1, ans2, ans3, ans4, ans5, TreeNode } = require('./minimalTree');
+const { ans1, ans2, ans3, ans4, ans5, TreeNode } = require("./minimalTree");
 
 // O(n) time
 // O(h) space, where h is the height of the tree
@@ -15,7 +15,9 @@ function checkHeight(root) {
   const rightHeight = checkHeight(root.right);
   if (rightHeight === Number.MIN_VALUE) return Number.MIN_VALUE;
   const heightDiff = leftHeight - rightHeight;
-  return Math.abs(heightDiff) > 1 ? Number.MIN_VALUE : Math.max(leftHeight, rightHeight) + 1;
+  return Math.abs(heightDiff) > 1
+    ? Number.MIN_VALUE
+    : Math.max(leftHeight, rightHeight) + 1;
 }
 
 function checkBalanced(tree) {
@@ -28,6 +30,27 @@ function checkBalanced(tree) {
 // console.log(checkBalanced(ans4));
 // console.log(checkBalanced(ans5));
 
+function isBalanced(root) {
+  return getHeight(root) !== -1;
+
+  function getHeight(root) {
+    if (!root) {
+      return 0;
+    }
+    let left = getHeight(root.left);
+    let right = getHeight(root.right);
+    if (left === -1 || right === -1 || Math.abs(left - right) > 1) {
+      return -1;
+    }
+    return 1 + Math.max(left, right);
+  }
+}
+
+// console.log(isBalanced(ans1));
+// console.log(isBalanced(ans2));
+// console.log(isBalanced(ans3));
+// console.log(isBalanced(ans4));
+// console.log(isBalanced(ans5));
 
 //       5
 //    2     7
