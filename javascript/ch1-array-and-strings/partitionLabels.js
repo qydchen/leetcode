@@ -16,6 +16,15 @@
 // S will have length in range [1, 500].
 // S will consist of lowercase English letters ('a' to 'z') only.
 
+// Intuition:
+// Iterate through left to right on S and save into a map the last index of each character
+// Iterate through left to right on S again and compare with an auxilary variable lastMax, that saves
+// the max last index occurence of a character
+// When the last max is equal to the current index i of S, then we know that is partition
+// Remember to save the partition in the form of the left most starting index minus the right index plus 1;
+// Remember this index as the variable l, in order to calculate the next n partitions
+// Return the partitions
+
 const partitionLabels = function (S) {
   const last = new Map();
   for (let i = 0; i < S.length; i++) last.set(S[i], i);
@@ -35,3 +44,6 @@ const partitionLabels = function (S) {
   console.log(last);
   return res;
 };
+
+const input = "ababcbacadefegdehijhklij";
+console.log(partitionLabels(input));
