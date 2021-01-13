@@ -36,13 +36,12 @@ const maxIncreaseKeepingSkyline = function (grid) {
   const leftRightSkyline = grid.map((row) => Math.max(...row)); // [8,7,9,3] vertical analysis
   let topDownSkyline = []; // [9,4,8,7] horizontal analysis
   for (let i = 0; i < grid.length; i++) {
-    let transpose = [];
+    let cols = [];
     for (let j = 0; j < grid[i].length; j++) {
-      transpose.push(grid[j][i]);
+      cols.push(grid[j][i]);
     }
-    topDownSkyline.push(transpose);
+    topDownSkyline.push(Math.max(...cols));
   }
-  topDownSkyline = topDownSkyline.map((row) => Math.max(...row));
 
   let output = 0;
   for (let i = 0; i < grid.length; i++) {
