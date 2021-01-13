@@ -1,6 +1,7 @@
 module.exports = class Node {
-  constructor(val) {
-    this.left = this.right = null;
+  constructor(val, left, right) {
+    this.left = left;
+    this.right = right;
     this.val = val;
   }
 };
