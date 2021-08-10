@@ -18,17 +18,15 @@ const inOrderPopulate = (node, stack) => {
 
 const inOrderSuccessorLessSpace = (node, target) => {
   let prev = null;
-  let curr = null;
   let ans = null;
   const inOrderTraverse = (n) => {
     if (n == null) return;
     inOrderTraverse(n.left);
-    prev = curr;
-    curr = n;
-    if (curr.val === target) {
+    if (n.val === target) {
       ans = prev;
-      return;
+      return ans;
     }
+    prev = n;
     inOrderTraverse(n.right);
   };
   inOrderTraverse(node);
@@ -52,13 +50,22 @@ root.right.right = new Node(8);
 root.right.right.left = new Node(7);
 root.right.right.right = new Node(11);
 
+const inOrder = (n) => {
+  if (!n) return;
+  inOrder(n.left);
+  console.log(n.val);
+  inOrder(n.right);
+};
+
+// inOrder(root);
+
 // console.log(inOrderSuccessor(root, 3)); // 1
 // console.log(inOrderSuccessor(root, 7)); // 6
 // console.log(inOrderSuccessor(root, 99)); // null
 
-// console.log(inOrderSuccessorLessSpace(root, 3));
-// console.log(inOrderSuccessorLessSpace(root, 7));
-// console.log(inOrderSuccessorLessSpace(root, 99));
+console.log(inOrderSuccessorLessSpace(root, 3));
+console.log(inOrderSuccessorLessSpace(root, 7));
+console.log(inOrderSuccessorLessSpace(root, 99));
 
 assert.strictEqual(inOrderSuccessor(root, 3)?.val, 1);
 assert.strictEqual(inOrderSuccessor(root, 7)?.val, 6);

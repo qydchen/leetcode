@@ -1,0 +1,55 @@
+Lecture 5 -> Software Engineering Interview Strategy Session
+
+leetcode.com, algoexpert.com/systemsexpert.com, structy.net
+
+FAANG -> 100 LC problems easy/medium
+
+Behavioral Interviews
+Google -> "Googliness"
+    - aka. are you smart, and are you a person that is easy to work with, are you a good communicator?
+    - when speaking about past roles and talking about working with others, always be the kind of person that argue about the idea, and not argue with others
+    - Phone screen -> 1 hr long, 2 LC problems
+    - Onsites -> 5 rounds, each round 45 mins, 4/5 round is technical with 2 problems each; 1/5 round is behavioral on "googliness"
+
+Amazon -> Leadership Principles
+    - https://www.amazon.jobs/en/principles
+    - Amazon will administer in their onsite 50% behavioral and 50% leetcode for each round. There are 5 rounds.
+    - Online assessment -> 2 problems, you need >80% test coverage to pass
+    - Each round is about 45 mins -> 2.5 mins for intros, 20 mins for behavioral questions, 20 mins for leetcode, and 2.5 mins for Q&A
+
+Facebook -> "Move fast, break things"
+    - aka. are you smart, and are you a person that is easy to work with, are you a good communicator?
+    - FB has a more bias for action compared to other FAANGs
+    - phone screen -> coderpad -> 1/2 problems LC easy/medium
+    - Onsites -> 5 rounds, each round 45 mins, 3/5 round is technical with 2 problems each; 1/5 round is systems design/product design, 1/5 round is behavioral on "googliness"
+
+For entry level, there is no systems design for GOOG + AMZN.
+For mid level, there will be systems design for GOOG + AMZN.
+
+Front-End Interviews
+    - https://github.com/yangshun/front-end-interview-handbook
+    - Combo of advanced JS topics, HTML + CSS questions
+    - There might also be DS+A, so be prepared to leetcode as well
+
+Start-ups
+    - interviews will be all over the place
+        - coding challenges
+        - leetcode problems/hackerranks/codility
+    - cultural fit
+    - existing knowledge of the startup's tech stack
+    - be prepared to do coding challenges. TYPICALLY, your interviewers will say "this will only take 2 hours to do". Be prepared to do it for 16 hours.
+
+How to target for companies
+    - For folks with no experience, DO NOT RELY on recruiters
+    - Reach out directly to the engineering manager
+
+Embedded Software Engineering
+    - Be familiar with TCP/IP protocols, Linux programming, C
+
+Random topics
+    - When interviewing for technical rounds
+        - Good behaviors
+            - Be proactive on stating time/space complexity
+            - Handle null cases
+            - Be proactive on handling edge cases
+
