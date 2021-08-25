@@ -1,0 +1,56 @@
+Lecture 5 -> Software Engineering Interview Strategy Session
+
+leetcode.com, algoexpert.com/systemsexpert.com, structy.net
+
+FAANG -> 100 LC problems easy/medium
+Complete noob (for FAANG)
+    Start off doing 20 questions, 5 Linked Lists, 5 Stack/Queues, 10 Tree/Graphs (spend as much time as you need)
+    Then, do 80 problems, with the same ratio
+
+Complete noob (for non-FAANG)
+    Start off doing 20 questions, 5 Linked Lists, 5 Stack/Queues, 5 Tree/Graphs (spend as much time as you need), 5 Arrays or just all Arrays/String manipulation
+    Then, do 80 problems, with the same ratio
+
+Behavioral Interviews
+    - "Tell me about a time where you received negative feedback and how did you address it?"
+    - "Tell me about a time where you had to find consensus in your team"
+    - "Tell me about a time where you had to deal with a difficult coworker"
+
+Google - "Googliness"
+    - Are you smart, nice, and overall good coder?
+    - 1 phone interview - technical round (could be opted out based on recommendations)
+    - 5 rounds of onsite - 4 technical round + 1 behavioral round    
+
+Amazon - "Leader Principles" ALOT
+    - Have behavioral interview answers prepared for each leadership principle
+    - 1 online assessment - 2 problems (easy/medium)
+    - 5 rounds of onsite - 4 rounds behavior/technical, 1 round behavioral
+
+Facebook
+    - 1 phone interview on a code share -> 1-2 problems
+    - 5 rounds of onsite - 4 rounds technical, 1 round behavioral/technical
+
+Front-End Interviews
+    - A lot of javascript-specific knowledge
+    - ex. code up tic-tac-toe in React
+    - https://github.com/h5bp/Front-end-Developer-Interview-Questions
+
+Start-ups
+    - in general, roles are skill specific
+    - because startups are lean, they tend not to provide mentorship, so they expect you to be an relative expert in your 
+        particular skill they are hiring for
+    - typically, they give you a coding challenge as a initial interview step, 
+        and then move on to final round which is to assess your cultural fit as well as additionla technical screening
+
+How to target for companies
+    - for entry level roles, and those with no experience, recruiters are useless
+        - use them as practice for "tell me about yourself?"
+    - reach out directly to engineering managers
+        - engineering managers at the very least would consider beyond your YOE and would look at your code/passion
+            - if you have a github account linked on your resume, some EMs would read your code
+            - do you code outside of work? any cool projects?
+
+Embedded Software Engineering
+    - Be familiar with TCP/IP protocols, Linux programming, C
+
+Random topics
