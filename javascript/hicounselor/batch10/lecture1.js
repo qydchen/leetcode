@@ -1,269 +1,140 @@
-// Trees
+// Time Complexity - represents the # of times a statement is evaluated
+// Space Complexity - represents the amount of memory an algorithm takes in terms of the amount of input
 
-// define node & edge
+// Big O notation - represents the worst case possible of a algorithm
 
-// n nodes, n - 1 edges
+function loopThings(n) {
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    // O(n) time complexity // O(1) space complexity
+    sum += i;
+  }
+  return sum;
+}
 
-// in order
-class TreeNode {
+// loopThings(100);
+// loopThings(99999);
+
+function generateGrid(length, width) {
+  // Time Complexity O(length * width) // Space Complexity O(l * w)
+  let grid = [];
+  for (let i = 0; i < length; i++) {
+    let row = [];
+    for (let j = 0; j < width; j++) {
+      row.push("X");
+    }
+    grid.push(row);
+  }
+  return grid;
+}
+
+// console.log(generateGrid(2, 3));
+// console.log(generateGrid(10, 10));
+
+// A binary tree is a data structure where each node can have at most two children, a left and a right. Each child itself is also a node.
+
+//       a
+//      / \
+//     b   c
+//    /
+//   d
+//  / \
+// e   f
+class Node {
   constructor(val) {
-    this.val = val;
     this.left = null;
     this.right = null;
-  }
-}
-
-// const one = new TreeNode(1);
-// const two = new TreeNode(2);
-// const three = new TreeNode(3);
-// const four = new TreeNode(4);
-
-// let root = three;
-// root.left = two;
-// root.right = four;
-// root.left.left = one;
-// root.right.right = new TreeNode(66);
-// root.right.right.left = new TreeNode(55);
-// root.right.right.right = new TreeNode(11);
-// root.right.right.left.left = new TreeNode(9);
-// root.right.right.left.right = new TreeNode(10);
-// root.right.right.right.right = new TreeNode(42);
-
-//    3
-//   /  \
-//  2   4
-// /     \
-// 1     66
-//      / \
-//     55  11
-//    / \   \
-//   9  10  42
-
-function inOrderTraversal(node) {
-  if (node) {
-    inOrderTraversal(node.left);
-    console.log(node.val);
-    inOrderTraversal(node.right);
-  }
-}
-
-// inOrderTraversal(root); // expect to print 1 2 3 4
-
-// pre order
-function preOrderTraversal(node) {
-  if (node) {
-    console.log(node.val);
-    preOrderTraversal(node.left);
-    preOrderTraversal(node.right);
-  }
-}
-
-// preOrderTraversal(root); // 3 2 1 4
-
-// post order
-function postOrderTraversal(node) {
-  if (node) {
-    postOrderTraversal(node.left);
-    postOrderTraversal(node.right);
-    console.log(node.val);
-  }
-}
-
-// postOrderTraversal(root); // 1 2 4 3
-
-// time / space complexity
-
-// time O(n) where n is the number of nodes in the binary tree
-// space O(n) where n is the number of nodes in the binary tree if the binary tree is reduced to a linked list
-
-// dfs, bfs
-function dfs(node, searchVal) {
-  if (node == null) return null;
-  if (node.val === searchVal) return node;
-  const left = dfs(node.left, searchVal);
-  const right = dfs(node.right, searchVal);
-  if (left != null) {
-    return left;
-  }
-  if (right != null) {
-    return right;
-  }
-  return null;
-}
-
-// console.log(dfs(root, 66).val);
-// console.log(dfs(root, 10).val);
-
-function bfs(node, searchVal) {
-  if (node == null) return null;
-
-  let queue = []; // []
-  queue.push(node);
-
-  while (queue.length !== 0) {
-    let curr = queue.shift(); // dequeues an element in the queue and assign that element into curr
-    // console.log("dequeued:", curr.val);
-    // console.log(
-    //   "my current queue:",
-    //   queue.map(({ val }) => val)
-    // );
-    if (curr.val === searchVal) {
-      return curr;
-    }
-    if (curr.left != null) {
-      queue.push(curr.left);
-    }
-    if (curr.right != null) {
-      queue.push(curr.right);
-    }
-    // console.log(
-    //   "my new queue:",
-    //   queue.map(({ val }) => val)
-    // );
-    // console.log("------");
-  }
-
-  return null;
-}
-
-// console.log(bfs(root, 42));
-
-// getMaxTree
-
-// Given a binary tree of all integers, return an array of integers where each index of the array represents the 'level' of a tree, and the value in the array
-// is the maximum value in that level
-
-function getMaxTree(node) {
-  let queue = [node];
-  const maxes = [];
-  while (queue.length !== 0) {
-    const max = Math.max(...queue.map((n) => n.val));
-    maxes.push(max);
-    const newQueue = [];
-    for (let n of queue) {
-      if (n.left != null) {
-        newQueue.push(n.left);
-      }
-      if (n.right != null) {
-        newQueue.push(n.right);
-      }
-    }
-    queue = newQueue;
-  }
-  return maxes;
-}
-
-// console.log(getMaxTree(root)); // [3,4,66,55,42]
-// Time O(n) where n is the numbers of nodes in the tree
-// Space O(h) where h is the height of the tree
-
-// bottom up solution
-
-//2     3        4
-//    /  \
-//1   2   4      3
-//   /     \
-//0  1     66    2
-//      / \
-//     55  11  1
-//    / \   \
-//   9  10  42 0
-
-// getHeight
-// Given a binary tree, return the height of the binary tree
-
-function getHeight(root) {
-  if (root == null) return null;
-  if (root.left == null && root.right == null) return 1;
-  const right = getHeight(root.right);
-  const left = getHeight(root.left);
-  const highest = Math.max(right, left);
-  return highest + 1;
-}
-
-// console.log(getHeight(root)); // 5
-
-// Graphs
-// undirected graph
-// A graph where edges have no direction
-
-// directed graph
-// A graph where edges have direction
-
-// 2 ways to represent graphs
-class GraphNode {
-  constructor(val) {
     this.val = val;
-    this.children = [];
-    this.visited = false;
   }
 }
 
-const adjacencyList = {
-  a: ["b", "c,", "d"],
-  b: ["e", "f", "g"],
-  g: ["x", "y"],
-  y: ["z"],
-};
+let a = new Node("a");
+let b = new Node("b");
+let c = new Node("c");
+let d = new Node("d");
 
-let [zero, one, two, three, four, five] = [
-  new GraphNode(0),
-  new GraphNode(1),
-  new GraphNode(2),
-  new GraphNode(3),
-  new GraphNode(4),
-  new GraphNode(5),
-];
+let root = a;
+a.left = b;
+b.left = d;
+a.right = c;
+d.left = new Node("e");
+d.right = new Node("f");
 
-zero.children.push(one, four, five);
-one.children.push(three, four);
-three.children.push(two, four);
-two.children.push(one);
-
-// crappy drawing of the graph;
-// 0 -> 1 <- 2
-// | \    \  ^
-// v  v    v |
-// 5   4 <- 3
-
-function dfSearch(node, target) {
-  if (node == null) return null;
-  node.visited = true;
-  if (node.val === target) {
-    return node;
+function dfs(root, target) {
+  // Time Complexity O(n) where n is # of nodes   | Space Complexity O(n) where n is # of nodes, when the binary tree collapses to a linked list
+  if (root == null) {
+    return null;
   }
-  for (let child of node.children) {
-    if (child.visited === false) {
-      if (child.val === target) {
-        return child;
-      }
-      dfSearch(child, target);
-    }
+  if (root.val === target) {
+    return root;
   }
-  //   return null;
+  return dfs(root.left, target) || dfs(root.right, target);
 }
 
-// console.log(dfSearch(zero, 2));
+// console.log(dfs(root, "f"));
+// console.log(dfs(root, "d"));
 
-function bfSearch(node, target) {
-  const queue = [];
-  node.visited = true;
-  queue.push(node);
-  while (queue.length !== 0) {
-    let curr = queue.shift();
-    if (curr.val === target) {
-      return curr;
-    }
-    for (let child of curr.children) {
-      if (child.visited === false) {
-        child.visited = true;
-        queue.push(child);
-      }
-    }
+// Recursion
+// the repeated application of a procedure or definition that can be divided in to smaller subproblems
+
+function exponent(base, pow) {
+  // Time O(pow) | Space O(pow)
+  if (pow === 0) {
+    // base case
+    return 1;
   }
+  return base * exponent(base, pow - 1);
+}
+// f(b, p) = b * f(b, p - 1)
+
+// console.log(exponent(3, 4)); // 3 * 3 * 3 * 3 = 81
+// console.log(exponent(5, 2)); // 5 * 5 = 25
+
+function reverseStrRecursive(str) {
+  // Time O(n) where n is length of str | Space O(n) where n is length of str
+  if (str.length === 0) return "";
+  return str[str.length - 1].concat(reverseStrRecursive(str.slice(0, -1)));
 }
 
-// Time Complexity O(n + m) where n is the number of nodes and m is the number of edges
-// Space Complexity O(n + m) where n is the number of nodes and m is the number of edges
+// console.log(reverseStrRecursive("apple"));
 
-console.log(bfSearch(zero, 2));
+// 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55
+// Write a function that returns the nth fibonacci number
+function fibs(n) {
+  // O(2^n) time
+  if (n === 0) {
+    return 0;
+  }
+  if (n === 1) {
+    return 1;
+  }
+  return fibs(n - 1) + fibs(n - 2);
+}
+
+// fibs(4) // 0, 1, 1, 2, 3 => 3
+
+// base case 0, 1
+
+// f(4) = f(3) + f(2)
+// f(n) = f(n - 1) + f(n - 2);
+
+// console.log(fibs(4));
+
+// Memoization -> a way to store precomputed values in memory such that we do not have to calculate it again
+function fibsWithMemo(n, memo = {}) {
+  // O(n) time complexity where the memo table "pruned" the call tree
+  if (n <= 0) {
+    return 0;
+  } else if (n === 1) {
+    return 1;
+  } else if (!memo[n]) {
+    memo[n] = fibsWithMemo(n - 1, memo) + fibsWithMemo(n - 2, memo);
+  }
+  return memo[n];
+}
+
+console.log("with memo");
+console.log(fibsWithMemo(40));
+console.log("---");
+console.log("no memo");
+console.log(fibs(40));
