@@ -232,18 +232,16 @@ function dfSearch(node, target) {
   if (node.val === target) {
     return node;
   }
+  let n = null;
   for (let child of node.children) {
     if (child.visited === false) {
-      if (child.val === target) {
-        return child;
-      }
-      dfSearch(child, target);
+      n = n ?? dfSearch(child, target);
     }
   }
-  //   return null;
+  return n;
 }
 
-// console.log(dfSearch(zero, 2));
+console.log(dfSearch(zero, 2));
 
 function bfSearch(node, target) {
   const queue = [];
@@ -266,4 +264,4 @@ function bfSearch(node, target) {
 // Time Complexity O(n + m) where n is the number of nodes and m is the number of edges
 // Space Complexity O(n + m) where n is the number of nodes and m is the number of edges
 
-console.log(bfSearch(zero, 2));
+// console.log(bfSearch(zero, 2));
