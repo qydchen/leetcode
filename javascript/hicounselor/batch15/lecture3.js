@@ -45,7 +45,9 @@ const topologicalSort = (edges) => {
   const sorted = [];
   const adjacencyList = {};
   // 1st part
-  for (let [from, to] of edges) {
+  for (let edge of edges) {
+    let from = edge[0];
+    let to = edge[1];
     if (!(from in adjacencyList)) adjacencyList[from] = [];
     if (!(to in adjacencyList)) adjacencyList[to] = [];
     adjacencyList[from].push(to);
@@ -267,3 +269,35 @@ h.children = [x];
 // console.log(LCA(a, e, f)); // b
 // console.log(LCA(a, a, a)); // a
 // console.log(LCA(a, g, h)); // g
+
+const graph = [
+  ["S", 1, 1],
+  [0, 1, 1],
+  [1, 1, 0],
+  [1, 1, "T"],
+];
+
+const traverse = (graph) => {
+  let endPos;
+  for (let i = 0; i < graph.length; i++) {
+    for (let j = 0; j < graph[i].length; j++) {
+      if (graph[i][j] === "T") {
+        endPos = [i, j];
+      }
+    }
+  }
+  return findShortestPath(graph, [0, 0], endPos) - 1;
+};
+
+const findShortestPath = (graph, start, end) => {
+  let [i, j] = start;
+  if (i < 0 || i >= graph.length) return;
+  if (j < 0 || j >= graph[i].length) return;
+  if (graph[i][j] === 0) return;
+  if (i === end[0] && j === end[1]) return 1;
+  const right = findShortestPath(graph, [i, j + 1], end) || Infinity;
+  const bottom = findShortestPath(graph, [i + 1, j], end) || Infinity;
+  return Math.min(right, bottom) + 1;
+};
+
+console.log(traverse(graph));
