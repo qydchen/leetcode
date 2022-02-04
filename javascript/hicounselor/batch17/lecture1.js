@@ -225,4 +225,13 @@ function tripleStepIter(n) {
   return intArray[intArray.length - 1];
 }
 
+// n = 4
+
+// [1,1,2,4,7]
+//          ^
+//  0 1 2 3 4
+
+
 console.log(tripleStepIter(35));
+// O(n) time
+// O(n) space
