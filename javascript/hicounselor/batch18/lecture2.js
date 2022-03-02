@@ -340,9 +340,9 @@ COO.children.push(...["Admin1", "Admin2"].map(s => new GraphNode(s)));
 
 const countSubordinates = (tree, target) => {
   if (tree === null) return null;
-  const employee = empDfs(tree, target);
+  const employee = empDfs(tree, target); // O(n) time O(n)
   if (employee === null) return null;
-  return _countSubordinates(employee) - 1;
+  return _countSubordinates(employee) - 1; // O(n) time O(n) space
 }
 
 const empDfs = (node, target) => {

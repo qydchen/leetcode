@@ -1,114 +1,114 @@
-// // // topological sort
+// topological sort
 
-// // class Node {
-// //   constructor(val) {
-// //     this.val = val;
-// //     this.children = [];
-// //   }
-// // }
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.children = [];
+  }
+}
 
-// // // DAG (Directed Acyclic Graph) - unidirectional graph with no cycles
+// DAG (Directed Acyclic Graph) - unidirectional graph with no cycles
 
-// // //             Class C
-// // //         /           \
-// // // Class A                 Class J - Class K
-// // //         \           /           /
-// // //             Class D            /
-// // //                               /
-// // // Class B ---------------------
+//             Class C
+//         /           \
+// Class A                 Class J - Class K
+//         \           /           /
+//             Class D            /
+//                               /
+// Class B ---------------------
 
-// // // [From, To]
-// // const input = [
-// //   ["ClassC", "ClassJ"],
-// //   ["ClassD", "ClassJ"],
-// //   ["ClassA", "ClassD"],
-// //   ["ClassJ", "ClassK"],
-// //   ["ClassA", "ClassC"],
-// //   ["ClassB", "ClassK"],
-// // ];
+// [From, To]
+const input = [
+  ["ClassC", "ClassJ"],
+  ["ClassD", "ClassJ"],
+  ["ClassA", "ClassD"],
+  ["ClassJ", "ClassK"],
+  ["ClassA", "ClassC"],
+  ["ClassB", "ClassK"],
+];
 
-// // const adjacencyList = {
-// //   a: ["b", "c,", "d", "g"],
-// //   b: ["e", "f", "g"],
-// //   g: ["x", "y"],
-// //   y: ["z", "a", "b"],
-// // };
+const adjacencyList = {
+  a: ["b", "c,", "d", "g"],
+  b: ["e", "f", "g"],
+  g: ["x", "y"],
+  y: ["z", "a", "b"],
+};
 
-// // // All valid output
-// // // output: [A,C,D,J,B,K]
-// // // [B,A,D,C,J,K]
-// // // [A,C,B,D,J,K]
+// All valid output
+// output: [A,C,D,J,B,K]
+// [B,A,D,C,J,K]
+// [A,C,B,D,J,K]
 
-// // // In general:
-// // // 1. Pick an unvisited node
-// // // 2. Beginning with the selected node, do a DFS exploring only unvisited nodes.
-// // // 3. On the recursive callback of the DFS,
-// // // add the current node to the topological ordering in reverse order
+// In general:
+// 1. Pick an unvisited node
+// 2. Beginning with the selected node, do a DFS exploring only unvisited nodes.
+// 3. On the recursive callback of the DFS,
+// add the current node to the topological ordering in reverse order
 
-// const topologicalSort = (edges) => {
-//   const sorted = [];
-//   // Step 1: construct adjacency list
-//   const adjacencyList = {};
-//   for (let edge of edges) {
-//     let from = edge[0];
-//     let to = edge[1];
-//     if (!(from in adjacencyList)) {
-//       adjacencyList[from] = [];
-//     }
-//     if (!(to in adjacencyList)) {
-//       adjacencyList[to] = [];
-//     }
-//     adjacencyList[from].push(to);
-//   }
+const topologicalSort = (edges) => {
+  const sorted = [];
+  // Step 1: construct adjacency list
+  const adjacencyList = {};
+  for (let edge of edges) {
+    let from = edge[0];
+    let to = edge[1];
+    if (!(from in adjacencyList)) {
+      adjacencyList[from] = [];
+    }
+    if (!(to in adjacencyList)) {
+      adjacencyList[to] = [];
+    }
+    adjacencyList[from].push(to);
+  }
 
-//   // Step 2: construct the topological ordering
-//   const visited = new Set();
-//   for (let key in adjacencyList) {
-//     visit(key, sorted, adjacencyList, visited);
-//   }
+  // Step 2: construct the topological ordering
+  const visited = new Set();
+  for (let key in adjacencyList) {
+    visit(key, sorted, adjacencyList, visited);
+  }
 
-//   return sorted;
-// }
+  return sorted;
+}
 
-// const visit = (key, sorted, adjacencyList, visited) => {
-//   const children = adjacencyList[key];
-//   if (visited.has(key)) return;
-//   visited.add(key);
+const visit = (key, sorted, adjacencyList, visited) => {
+  const children = adjacencyList[key];
+  if (visited.has(key)) return;
+  visited.add(key);
 
-//   for (let child of children) {
-//     visit(child, sorted, adjacencyList, visited);
-//   }
+  for (let child of children) {
+    visit(child, sorted, adjacencyList, visited);
+  }
 
-//   sorted.unshift(key);
-// }
-
-
-// // console.log(topologicalSort(input));
+  sorted.unshift(key);
+}
 
 
-// // // const input2 = [
-// // //   [1, 2],
-// // //   [1, 3],
-// // //   [2, 4],
-// // //   [3, 4],
-// // // ];
+// console.log(topologicalSort(input));
 
-// // // 1 - 2 - 4
-// // //   \ 3 /
 
-// // // const output = ["A", "C", "D", "J", "B", "K"];
+// const input2 = [
+//   [1, 2],
+//   [1, 3],
+//   [2, 4],
+//   [3, 4],
+// ];
 
-// // // Time complexity O(E + V) Where E is # of edges + V is # of nodes
-// // // Space complexity O(V) Where V is # of nodes
+// 1 - 2 - 4
+//   \ 3 /
 
-// // console.log(topologicalSort(input));
-// // console.log(
-// //   topologicalSort([
-// //     ["a", "b"],
-// //     ["b", "c"],
-// //     ["c", "a"],
-// //   ])
-// // );
+// const output = ["A", "C", "D", "J", "B", "K"];
+
+// Time complexity O(E + V) Where E is # of edges + V is # of nodes
+// Space complexity O(V) Where V is # of nodes
+
+console.log(topologicalSort(input));
+console.log(
+  topologicalSort([
+    ["a", "b"],
+    ["b", "c"],
+    ["c", "a"],
+  ])
+);
 
 
 
