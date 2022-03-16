@@ -11,11 +11,12 @@ Behavioral Interviews
     - "Tell me about a time where you received negative feedback and how did you address it?"
     - "Tell me about a time where you had to find consensus in your team"
     - "Tell me about a time where you had to deal with a difficult coworker"
+    - "Tell us about a system that you architected or designed"
 
 Google - "Googliness"
     - Are you smart, nice, and overall good coder?
     - 1 phone interview - technical round (could be opted out based on recommendations)
-    - 5 rounds of onsite - 4 technical round + 1 behavioral round    
+    - 5 rounds of onsite - 4 technical round + 1 behavioral round
 
 Amazon - "Leader Principles" ALOT
     - Have behavioral interview answers prepared for each leadership principle
