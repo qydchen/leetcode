@@ -243,7 +243,7 @@ function dfSearch(node, target) {
 
 // Time complexity O(V + E) where V is the total number of vertices (aka nodes) in the graph
 // and E where is the total number of edges (connections) in the graph
-// Space complexity O(V + E)
+// Space complexity O(V)
 
 // console.log(dfSearch(zero, 4));
 // console.log(dfSearch(zero, 2));
@@ -270,14 +270,7 @@ function bfSearch(node, target) {
 }
 
 
-
-
-
-
-
-
-
 // Time Complexity O(n + m) where n is the number of nodes and m is the number of edges
-// Space Complexity O(n + m) where n is the number of nodes and m is the number of edges
+// Space Complexity O(n) where n is the number of nodes
 
 console.log(bfSearch(zero, 4));
