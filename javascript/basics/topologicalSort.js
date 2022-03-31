@@ -6,7 +6,8 @@
     events must occur before others.
 
     Suppose you're a student at university and the class you need to take to graduate is class K, then you
-    must take classes A, B, D and E as prerequsities. In this sense there is an ordering
+    must take classes J and B as prerequsities, but in order to take J, you must take classes C and D,
+    in order to take classes C and D, you must take class A. In this sense there is an ordering
     on the nodes of the graph.
 
                 Class C
@@ -19,9 +20,6 @@
 
     The only type of graph which has a valid topological ordering is a Directed Acyclic Graph
     (DAG). These are graphs with directed edges and no cycles.
-
-    By definition, all rooted trees have a topological ordering since they do not
-    contain any cycles.
 
     For general DAGs:
         1. Pick an unvisited node
@@ -65,7 +63,7 @@ const topologicalSort = (edges) => {
     visited.add(val);
     for (let kidVal of node.children) {
       if (ancestors.includes(kidVal)) {
-        throw new Error('closed chain: ' + kidVal + ' is in ' + val);
+        throw new Error("closed chain: " + kidVal + " is in " + val);
       }
       visit(kidVal, ancestors.slice());
     }
@@ -90,9 +88,9 @@ function tsortTest() {
 
   // example 2: failure ( A > B > C > A )
   edges = [
-    ['A', 'B'],
-    ['B', 'C'],
-    ['C', 'A'],
+    ["A", "B"],
+    ["B", "C"],
+    ["C", "A"],
   ];
 
   try {
@@ -110,12 +108,12 @@ function tsortTest() {
   //                               /
   // Class B ---------------------
   edges = [
-    ['ClassA', 'ClassC'],
-    ['ClassA', 'ClassD'],
-    ['ClassJ', 'ClassK'],
-    ['ClassB', 'ClassK'],
-    ['ClassC', 'ClassJ'],
-    ['ClassD', 'ClassJ'],
+    ["ClassA", "ClassC"],
+    ["ClassA", "ClassD"],
+    ["ClassJ", "ClassK"],
+    ["ClassB", "ClassK"],
+    ["ClassC", "ClassJ"],
+    ["ClassD", "ClassJ"],
   ];
 
   sorted = topologicalSort(edges);
