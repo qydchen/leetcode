@@ -2,10 +2,10 @@
     Time complexity = O(|E| + |V|) where E is a number of edges and |V| is the number of nodes
     Space complexity = O(V)
 
-    Many real world situations can be modelled as a graph when directed edges where some
+    Many real world situations can be modelled as a graph where some
     events must occur before others.
 
-    Suppose you're a student at university X and you want to take Class H, then you
+    Suppose you're a student at university and the class you need to take to graduate is class K, then you
     must take classes A, B, D and E as prerequsities. In this sense there is an ordering
     on the nodes of the graph.
 
@@ -26,7 +26,7 @@
     For general DAGs:
         1. Pick an unvisited node
         2. Beginning with the selected node, do a DFS exploring only unvisited nodes.
-        3. On the recursive callback of the DFS, add the current node to the topoligcal
+        3. On the recursive callback of the DFS, add the current node to the topological
         ordering in reverse order.
 */
 
