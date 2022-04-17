@@ -19,15 +19,24 @@ function minNumberOfCoinsForChange(n, denoms) {
   return mins[mins.length - 1] !== Infinity ? mins[mins.length - 1] : -1;
 }
 
+// [Infinity, Infinity, Infinity, Infinity]
+
+// denom = 2
+// amt = 0
+// 2 >= 2
+// mins[2] = Min(Infinity, mins(2 - 2) + 1);
+// []
+
+
 console.log(minNumberOfCoinsForChange(3, [2, 1]));
 // console.log(minNumberOfCoinsForChange(50, [2, 1, 5]));
 
 function minNumberOfCoinsForChangeIterative(denoms, m, V){
-     
+
     // Base case
     if (V == 0)
         return 0;
-     
+
     let res = Infinity;
     // Try every coin that has smaller
     // value than V
@@ -35,7 +44,7 @@ function minNumberOfCoinsForChangeIterative(denoms, m, V){
         if (denoms[i] <= V){
             let sub_res = minNumberOfdenomsForChangeIterative(denoms, m,
                                V - denoms[i]);
-             
+
             // Check for INT_MAX to avoid overflow and
             // see if result can minimized
             if (sub_res != Number.MAX_VALUE &&
@@ -45,7 +54,7 @@ function minNumberOfCoinsForChangeIterative(denoms, m, V){
     }
     return res;
 }
- 
+
 // Driver code
 let denoms = [ 9, 6, 5, 1 ];
 let target = 11;
