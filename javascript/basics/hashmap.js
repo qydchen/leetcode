@@ -25,7 +25,6 @@ var HashTable = function() {
   this._limit = 8;
 }
 
-
 HashTable.prototype.insert = function(key, value) {
   //create an index for our storage location by passing it through our hashing function
   var index = this.hashFunc(key, this._limit);

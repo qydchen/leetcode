@@ -1,7 +1,7 @@
 /*
 Given an array of pairs of classes. The first element in the pair represents a prerequisite
 class that must be taken in order to take the next class, which is represented by the second
-element. Return any ordering of classes you should take to finsh all courses
+element. Return any ordering of classes you should take to finish all courses
 */
 
 //           Class C
@@ -21,36 +21,48 @@ let edges = [
   ["ClassD", "ClassJ"],
 ];
 
-let expectedOutput = ["ClassA"];
-
-function topologicalSort(edges) {
+function generateClasses(edges) {
+  // build the adjacency list
   const adjacencyList = {};
-  for (let [from, to] of edges) {
-    if (!(from in adjacencyList)) {
-      adjacencyList[from] = [];
-    }
-    if (!(to in adjacencyList)) {
-      adjacencyList[to] = [];
-    }
+
+  for (let edge of edges) {
+    const from = edge[0];
+    const to = edge[1];
+    if (!(from in adjacencyList)) adjacencyList[from] = [];
+    if (!(to in adjacencyList)) adjacencyList[to] = [];
     adjacencyList[from].push(to);
   }
 
-  const visited = new Set();
+  // perform topological sort
   const sorted = [];
-  for (let course in adjacencyList) {
-    dfs(course, adjacencyList, sorted, visited);
+  const visited = new Set();
+  for (let node in adjacencyList) {
+    visit(node, sorted, adjacencyList, visited);
   }
+
   return sorted;
 }
 
-function dfs(course, adjacencyList, sorted, visited) {
-  if (visited.has(course)) return;
-  visited.add(course);
-  let children = adjacencyList[course];
+function visit(node, sorted, adjacencyList, visited) {
+  const children = adjacencyList[node];
+  if (visited.has(node)) return;
+  visited.add(node);
   for (let child of children) {
-    dfs(child, adjacencyList, sorted, visited);
+    visit(child, sorted, adjacencyList, visited);
   }
-  sorted.unshift(course);
+  sorted.unshift(node);
 }
 
-console.log(topologicalSort(edges));
+console.log(generateClasses(edges));
+
+// Topological Sort - algorithm that sorts orderings of prerequisites
+
+// Direct Acyclic Graph - graphs with directed edges and no cycles
+
+// 1. Convert edges to an adjacency list
+// 2. Perform topological on the adjacency list
+//    a. Pick an unvisited node
+//    b. Beginning with the selected node, do a DFS exploring only unvisited nodes.
+//    c. On the recursive callback of the DFS, add the current node to the topological ordering
+//     in reverse order
+
