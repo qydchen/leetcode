@@ -1,5 +1,5 @@
 /*
-Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. 
+Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
 An island is surrounded by water and is formed by connecting adjacent lands horizontally
 or vertically. You may assume all four edges of the grid are all surrounded by water.
 */
@@ -70,13 +70,13 @@ const traverse = (grid, i, j, visited) => {
 class UnionFind {
     constructor(grid) {
         this.count = 0;
-        this.parent = Array(grid.length * grid[0].length);
+        this.P = Array(grid.length * grid[0].length);
         this.rank = Array(grid.length * grid[0].length);
         for (let i = 0; i < grid.length; i++) {
             const colCount = grid[i].length;
             for (let j = 0; j < colCount; j++) {
                 if (grid[i][j] === "1") {
-                    this.parent[i * colCount + j] = i * colCount + j;
+                    this.P[i * colCount + j] = i * colCount + j;
                     this.count++;
                 }
                 this.rank[i * colCount + j] = 0;
@@ -84,24 +84,24 @@ class UnionFind {
         }
     }
     find(i) {
-        if (this.parent[i] !== i) this.parent[i] = this.find(this.parent[i]);
-        return this.parent[i];
+        if (this.P[i] !== i) this.P[i] = this.find(this.P[i]);
+        return this.P[i];
     }
     union(x, y) {
         const [rootx, rooty] = [this.find(x), this.find(y)];
         if (rootx != rooty) {
-            if (this.rank[rootx] > this.rank[rooty]) {
-                this.parent[rooty] = rootx;
-            } else if (this.rank[rootx] < this.rank[rooty]) {
-                this.parent[rootx] = rooty;
-            } else {
-                this.parent[rooty] = rootx;
-                this.rank[rootx] += 1;
-            }
-            this.count--;
+          if (this.rank[rootx] > this.rank[rooty]) {
+            this.P[rooty] = rootx;
+          } else if (this.rank[rootx] < this.rank[rooty]) {
+            this.P[rootx] = rooty;
+          } else {
+            this.P[rooty] = rootx;
+            this.rank[rootx] += 1;
+          }
+          this.count--;
         }
         console.log(this.rank);
-        console.log(this.parent);
+        console.log(this.P);
     }
     getCount() {
         return this.count;
