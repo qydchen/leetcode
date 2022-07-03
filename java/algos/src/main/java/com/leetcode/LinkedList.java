@@ -41,4 +41,32 @@ public class LinkedList {
         }
         System.out.println(' ');
     }
+
+    // reverse linkedlist in k subset
+    // 1->2->3->4->5->6->7->8->NULL k = 3
+    // 3->2->1->6->5->4->8->7->NULL'
+    public Node reverse(Node head, int k) { // O(n) time | O(n/k) space
+        if (head == null) {
+            return null;
+        }
+        Node curr = head;
+        Node next = null;
+        Node prev = null;
+
+        int count = 0;
+
+        while (count < k && curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            count += 1;
+        }
+
+        if (next != null) {
+            head.next = this.reverse(next, k);
+        }
+        this.head = prev;
+        return prev;
+    }
 }
