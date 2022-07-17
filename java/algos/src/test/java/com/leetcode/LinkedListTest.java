@@ -2,7 +2,6 @@ package com.leetcode;
 
 import static org.junit.Assert.assertTrue;
 
-import org.hamcrest.internal.ArrayIterator;
 import org.junit.Test;
 
 public class LinkedListTest {
@@ -48,8 +47,14 @@ public class LinkedListTest {
         for (int i = 0; i < arr.length; i++) {
             linkedList.push(arr[i]);
         }
-        linkedList.printList();
+
         linkedList.reverse(linkedList.head, 3);
         linkedList.printList();
+        assertTrue(linkedList.head.data == 6);
+        assertTrue(linkedList.head.next.data == 7);
+        assertTrue(linkedList.head.next.next.data == 8);
+        assertTrue(linkedList.head.next.next.next.data == 3);
+        assertTrue(linkedList.head.next.next.next.next.data == 4);
+        assertTrue(linkedList.head.next.next.next.next.next.data == 5);
     }
 }
