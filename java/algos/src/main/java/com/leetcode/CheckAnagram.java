@@ -1,11 +1,6 @@
 package com.leetcode;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.stream.Collectors;
 
 public class CheckAnagram {
     // Given 2 strings Write a function to check whether they are anagrams
