@@ -38,7 +38,7 @@ function permute(arr, currentPermutation, permutations) {
 [1,3,2]
 */
 // console.log(permutations([1, 2, 3]));
-permutations([1, 2, 3]);
+// permutations([1, 2, 3]);
 
 function permutations2(arr) {
   if (!arr.length) return [[]];
@@ -47,10 +47,11 @@ function permutations2(arr) {
     let current = arr[i];
     let left = arr.slice(0, i);
     let right = arr.slice(i + 1);
-    let perm = permutations2(left.concat(right));
-    perms = perms.concat(perm.map((p) => [current].concat(p)));
+    let perm = permutations2([...left, ...right]);
+    perms = [...perms, ...perm.map((p) => [current].concat(p))];
   }
   return perms;
 }
 
 console.log(permutations2([1, 2, 3]));
+// console.log(permutations2("abc123".split("")));
