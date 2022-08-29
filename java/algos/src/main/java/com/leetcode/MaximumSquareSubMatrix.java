@@ -1,6 +1,5 @@
 package com.leetcode;
 
-import java.util.Arrays;
 
 // Given an N x N matrix, find a k x k submatrix where k <= N and k >= 1, such that the sum of all the 
 // elements in the submatrix is a maximum. The input matrix can contain zero, positive and negative numbers.
