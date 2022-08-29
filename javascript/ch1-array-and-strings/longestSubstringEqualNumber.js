@@ -19,12 +19,21 @@ const longestSubstringEqualNumber = (word) => {
     } else {
       firstIndex[cumDiff] = i;
     }
-    console.log({ firstIndex, longestString, cumDiff, length });
+    console.log({
+      firstIndex,
+      longestString,
+      cumDiff,
+      length,
+      i,
+      "firstIndex[cumDiff]": firstIndex[cumDiff],
+    });
   }
   return longestString;
 };
 
-console.log(longestSubstring("********#*#****###")); // #*#****###
-// console.log(longestSubstring("#*")); // #*
-// console.log(longestSubstring("####****"));
-// console.log(longestSubstring("*#*#"));
+// console.log(longestSubstringEqualNumber("********#*#****###")); // #*#****###
+// console.log(longestSubstringEqualNumber("####****"));
+// console.log(longestSubstringEqualNumber("*#*#"));
+console.log(longestSubstringEqualNumber("#*")); // #*
+console.log(longestSubstringEqualNumber("###***"))
+// console.log(longestSubstringEqualNumber("####****##***#"))
