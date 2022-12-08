@@ -26,4 +26,11 @@ public class CheckAnagramTest {
         boolean actual = solution.solution("hello world", "goodbye");
         assertFalse(actual);
     }
+
+    @Test
+    public void test4() {
+        CheckAnagram solution = new CheckAnagram();
+        boolean actual = solution.solution("anagram", "nagaram");
+        assertTrue(actual);
+    }
 }

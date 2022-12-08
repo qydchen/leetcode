@@ -18,6 +18,5 @@ public class CheckAnagram {
         Arrays.sort(charArr2);
 
         return Arrays.equals(charArr1, charArr2);
-
     }
 }
