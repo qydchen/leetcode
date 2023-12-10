@@ -1,14 +1,12 @@
 const mergeTwoSortedArray = (a, b) => {
-  let p1 = a.length - b.length - 1; // 1
-  let p2 = a.length - 1; // 3
-  let p3 = b.length - 1; // 1
+  let p1 = a.length - b.length - 1;
+  let p2 = a.length - 1;
+  let p3 = b.length - 1;
 
   while (p3 >= 0 && p1 >= 0) {
-    // 0 >= 0
-    let bValue = b[p3]; // 2
-    let aValue = a[p1]; // 4
+    let bValue = b[p3];
+    let aValue = a[p1];
     if (bValue > aValue) {
-      // 2 > 4 ?
       a[p2] = bValue;
       p3--;
     } else {
@@ -18,12 +16,9 @@ const mergeTwoSortedArray = (a, b) => {
     p2--;
   }
 
-  if (p1 <= 0) {
-    p1 = p3;
-  }
-  while (p1 >= 0) {
-    a[p1] = b[p1];
-    p1--;
+  while (p3 >= 0) {
+    a[p3] = b[p3];
+    p3--;
   }
   return a;
 };
