@@ -24,17 +24,13 @@
 // O(w * n * log(n)) time
 // O(wn) space where w is the number of words and n is the length of the longest word
 
-function groupAnagrams(words) {
+function groupAnagrams(strs) {
   let map = new Map();
-  for (let word of words) {
-    const sorted = [...word].sort().join("");
-    if (!map.has(sorted)) {
-      map.set(sorted, [word]);
-    } else {
-      map.get(sorted).push(word);
-    }
+  for (let s of strs) {
+    let sorted = s.split("").sort().join("");
+    map.has(sorted) ? map.get(sorted).push(s) : map.set(sorted, [s]);
   }
-  return [...map.values()];
+  return Array.from(map.values());
 }
 
 const words = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"];
