@@ -1,4 +1,4 @@
-// // a function that will retry at least 3 times on an async call
+// // a function that will retry at least X times on an async call
 
 const retry = (cb, times = 0) => {
   return new Promise((resolve, reject) => {
