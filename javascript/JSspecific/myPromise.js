@@ -43,8 +43,24 @@ const o = new MyPromise((res) => {
 o.then((c) => c + 2)
   .then(console.log)
   .then((_) => "foo")
-  .then((v) => new MyPromise((res) => setTimeout(() => res(v + "bar"), 1000)))
-  .then(console.log);
+  .then((v) => {
+    return new MyPromise((res) =>
+      setTimeout(() => {
+        const ans = v + "bar";
+        console.log(ans);
+        res(ans);
+      }, 1000)
+    );
+  })
+  .then((v) => {
+    return new MyPromise((res) =>
+      setTimeout(() => {
+        const ans = v + "baz";
+        console.log(ans);
+        res(ans);
+      }, 1000)
+    );
+  });
 
 o.then((p) => p + p).then(console.log);
 
@@ -58,28 +74,24 @@ p.then((v) => v + 5)
 
 p.then((v) => v * 99).then(console.log);
 
-// p.then(
-//   (v) =>
-//     new MyPromise((res) => {
-//       setTimeout(() => res(v + 69), 1000);
-//     })
-// )
-//   // .then((v) => {
-//   //   return MyPromise.race([slow, fast]).then((r) => r + v);
-//   // })
-//   .then(console.log);
+p.then(
+  (v) =>
+    new MyPromise((res) => {
+      setTimeout(() => res(v + 69), 1000);
+    })
+).then(console.log);
 
-// const slow = new MyPromise((r) => {
-//   setTimeout(() => {
-//     r(100);
-//   }, 5000);
-// });
+const slow = new MyPromise((r) => {
+  setTimeout(() => {
+    r(100);
+  }, 5000);
+});
 
-// slow.then(console.log);
+slow.then(console.log);
 
-// const fast = new MyPromise((r) => {
-//   setTimeout(() => {
-//     r(10);
-//   }, 1000);
-// });
-// fast.then(console.log);
+const fast = new MyPromise((r) => {
+  setTimeout(() => {
+    r(10);
+  }, 1000);
+});
+fast.then(console.log);
