@@ -1,5 +1,6 @@
 // // a function that will retry at least X times on an async call
 
+// promise version
 const retry = (cb, times = 0) => {
   return new Promise((resolve, reject) => {
     let cbValue = cb();
@@ -50,6 +51,8 @@ retry(call, 1)
   .catch(console.log); // call should fail
 retry(() => 55 + 14, 2).then((v) => console.log("success", v));
 
+
+// async version
 const retry2 = async (cb, times = 0) => {
   let ans;
   try {
