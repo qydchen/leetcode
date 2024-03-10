@@ -184,3 +184,4 @@ s.pivot("Shirts sold", "Color", "Date", "SUM");
 s.pivot("Shirts sold", "Color", "Date", "AVG");
 s.pivot("Shirts sold", "Color", "Date", "MIN");
 s.pivot("Shirts sold", "Color", "Date", "MAX");
+s.pivot("Shirts sold", "Store ID", "Date", "SUM");
