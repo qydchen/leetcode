@@ -80,13 +80,6 @@ class Jason {
         } else {
           stack.push({});
         }
-      } else if (token.type === "start-array") {
-        if (!out) {
-          out = [];
-          stack.push(out);
-        } else {
-          stack.push([]);
-        }
       } else if (token.type.includes("end")) {
         const token1 = stack.pop();
         if (Array.isArray(stack.at(-1))) {
@@ -96,6 +89,13 @@ class Jason {
           if (token2) {
             stack.at(-1)[token2] = token1;
           }
+        }
+      } else if (token.type === "start-array") {
+        if (!out) {
+          out = [];
+          stack.push(out);
+        } else {
+          stack.push([]);
         }
       } else if (token.type === "field-name") {
         stack.push(token.val);
