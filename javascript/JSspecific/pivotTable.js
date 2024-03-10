@@ -41,9 +41,9 @@ class Sheet {
   #getOperationCb(operation) {
     switch (operation) {
       case "SUM":
-        return (agg, el) => agg + el;
+        return (agg, el) => (agg ?? 0) + el;
       case "MAX":
-        return (agg, el) => Math.max(agg, el);
+        return (agg, el) => Math.max(agg ?? 0, el);
       case "MIN":
         return (agg, el) => Math.min(agg ?? Infinity, el);
       case "AVG":
@@ -67,7 +67,7 @@ class Sheet {
    * @param {string} yCol
    * @param {string} operation
    */
-  pivot = (aggCol, xCol, yCol, operation) => {
+  pivot = (aggCol, xCol, yCol, operation = "SUM") => {
     let map = {};
     let rows = new Set();
     let cols = new Set();
@@ -185,3 +185,6 @@ s.pivot("Shirts sold", "Color", "Date", "AVG");
 s.pivot("Shirts sold", "Color", "Date", "MIN");
 s.pivot("Shirts sold", "Color", "Date", "MAX");
 s.pivot("Shirts sold", "Store ID", "Date", "SUM");
+s.pivot("Shirts sold", "Store ID", "Color", "SUM");
+s.pivot("Shirts sold", "Store ID", "Color", "MAX");
+s.pivot("Shirts sold", "Store ID", "Color", "MIN");
