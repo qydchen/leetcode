@@ -33,4 +33,125 @@
 // assume that a pivot table specification includes the name of the column to be aggregated, the name of the
 //  column to use for the x axis, and the name of the column to use for the y axis.
 
-class Pivot {}
+class Sheet {
+  constructor(table) {
+    this.table = table;
+  }
+
+  /**
+   * @param {string} aggCol
+   * @param {string} xCol
+   * @param {string} yCol
+   */
+  pivot = (aggCol, xCol, yCol) => {
+    let map = {};
+    let rows = new Set();
+    let cols = new Set();
+    for (let el of this.table) {
+      let k = serialize(el[xCol], el[yCol]);
+      if (!(k in map)) {
+        map[k] = 0;
+      }
+      map[k] += el[aggCol];
+      rows.add(el[xCol]);
+      cols.add(el[yCol]);
+    }
+
+    const columns = Array.from(cols);
+    console.log([`Sum of ${aggCol.toLowerCase()}`, ...columns]);
+    Array.from(rows).forEach((x) => {
+      let data = columns.map((y) => {
+        const key = serialize(x, y);
+        return map[key] ?? 0;
+      });
+      console.log([x, ...data]);
+    });
+  };
+}
+
+function serialize(x, y) {
+  return `${x}&${y}`;
+}
+
+const data = [
+  {
+    "Store ID": "abcd1234",
+    Date: "2021-05-25",
+    Color: "red",
+    Size: "XS",
+    "Shirts sold": 1,
+  },
+  {
+    "Store ID": "abcd1234",
+    Date: "2021-05-25",
+    Color: "blue",
+    Size: "L",
+    "Shirts sold": 20,
+  },
+  {
+    "Store ID": "abcd1234",
+    Date: "2021-05-25",
+    Color: "green",
+    Size: "M",
+    "Shirts sold": 300,
+  },
+  {
+    "Store ID": "abcd1234",
+    Date: "2021-05-26",
+    Color: "red",
+    Size: "XS",
+    "Shirts sold": 4,
+  },
+  {
+    "Store ID": "abcd1234",
+    Date: "2021-05-26",
+    Color: "black",
+    Size: "S",
+    "Shirts sold": 50,
+  },
+  {
+    "Store ID": "5678wxyz",
+    Date: "2021-05-25",
+    Color: "blue",
+    Size: "XL",
+    "Shirts sold": 600,
+  },
+  {
+    "Store ID": "5678wxyz",
+    Date: "2021-05-25",
+    Color: "green",
+    Size: "M",
+    "Shirts sold": 7,
+  },
+  {
+    "Store ID": "5678wxyz",
+    Date: "2021-05-25",
+    Color: "black",
+    Size: "L",
+    "Shirts sold": 80,
+  },
+  {
+    "Store ID": "5678wxyz",
+    Date: "2021-05-26",
+    Color: "blue",
+    Size: "S",
+    "Shirts sold": 900,
+  },
+  {
+    "Store ID": "e1f9g2h8",
+    Date: "2021-05-26",
+    Color: "red",
+    Size: "S",
+    "Shirts sold": 1,
+  },
+  {
+    "Store ID": "e1f9g2h8",
+    Date: "2021-05-27",
+    Color: "black",
+    Size: "M",
+    "Shirts sold": 20,
+  },
+];
+
+let s = new Sheet(data);
+s.pivot("Shirts sold", "Color", "Date");
