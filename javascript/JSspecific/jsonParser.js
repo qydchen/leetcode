@@ -65,45 +65,39 @@ class Jason {
   }
 
   parse = () => {
-    return [
-      this.tokenize("start-object"),
-      ...this._parse(this.json),
-      this.tokenize("end-object"),
-    ];
+    return [...this.#parse(this.json)];
   };
 
-  _parse = (obj) => {
+  #parse = (data) => {
     let out = [];
-    for (let key in obj) {
-      let val = obj[key];
-      const type = this.#getType(val);
-      const field = this.tokenize("field-name", key);
-      out.push(field);
-      if (type === "object") {
-        const start = this.tokenize("start-object");
-        out.push(start);
-        const nested = this._parse(val);
-        out = [...out, ...nested];
-        const endType = this.tokenize("end-object");
-        out.push(endType);
-      } else if (type === "array") {
-        const startArray = this.tokenize("start-array");
-        const arrTokens = val.map((v) => this.tokenize(this.#getType(v), v));
-        const endArray = this.tokenize("end-array");
-        out = [...out, startArray, ...arrTokens, endArray];
-      } else {
-        const valType = this.tokenize(type, val);
-        out.push(valType);
+    const t = this.#getType(data);
+    if (t === "object") {
+      const start = this.tokenize("start-object");
+      out.push(start);
+      for (const key in data) {
+        const val = data[key];
+        const field = this.tokenize("field-name", key);
+        const nested = this.#parse(val);
+        out = [...out, field, ...nested];
       }
+      const endObj = this.tokenize("end-object");
+      out.push(endObj);
+    } else if (t === "array") {
+      const startArray = this.tokenize("start-array");
+      const arrTokens = data.flatMap((v) => this.#parse(v));
+      const endArray = this.tokenize("end-array");
+      out = [...out, startArray, ...arrTokens, endArray];
+    } else {
+      const valType = this.tokenize(t, data);
+      out.push(valType);
     }
+
     return out;
   };
 
   #getType = (value) => {
-    // array, object, number, string, null, boolean
     if (Array.isArray(value)) return "array";
     if (value === null) return "null";
-    if (value === undefined) return "undefined";
     return typeof value;
   };
 
@@ -190,3 +184,60 @@ let expected3 = [
   { type: "end-object" },
 ];
 assert.deepStrictEqual(json3.parse(), expected3);
+
+let json4 = new Jason([]);
+let expected4 = [{ type: "start-array" }, { type: "end-array" }];
+assert.deepStrictEqual(json4.parse(), expected4);
+
+let json5 = new Jason(["abc", null, false, 123]);
+let expected5 = [
+  { type: "start-array" },
+  { type: "string", val: "abc" },
+  { type: "null" },
+  { type: "boolean" },
+  { type: "number", val: 123 },
+  { type: "end-array" },
+];
+assert.deepStrictEqual(json5.parse(), expected5);
+
+let json6 = new Jason(["abc", null, false, 123, obj]);
+let expected6 = [
+  { type: "start-array" },
+  { type: "string", val: "abc" },
+  { type: "null" },
+  { type: "boolean" },
+  { type: "number", val: 123 },
+  { type: "start-object" },
+  { type: "field-name", val: "a" },
+  { type: "number", val: 10 },
+  { type: "field-name", val: "b" },
+  { type: "string", val: "foo" },
+  { type: "field-name", val: "c" },
+  { type: "start-array" },
+  { type: "null" },
+  { type: "boolean", val: true },
+  { type: "end-array" },
+  { type: "field-name", val: "d" },
+  { type: "start-object" },
+  { type: "field-name", val: "e" },
+  { type: "start-object" },
+  { type: "field-name", val: "f" },
+  { type: "string", val: "nested" },
+  { type: "end-object" },
+  { type: "end-object" },
+  { type: "end-object" },
+  { type: "end-array" },
+];
+assert.deepStrictEqual(json6.parse(), expected6);
+
+let json7 = new Jason("abc");
+let expected7 = [{ type: "string", val: "abc" }];
+assert.deepStrictEqual(
+  json7.parse(),
+  expected7,
+  "should work for scalar types"
+);
+
+let json8 = new Jason(null);
+let expected8 = [{ type: "null" }];
+assert.deepStrictEqual(json8.parse(), expected8, "should work for null types");
