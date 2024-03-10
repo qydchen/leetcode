@@ -38,34 +38,60 @@ class Sheet {
     this.table = table;
   }
 
+  #getOperationCb(operation) {
+    switch (operation) {
+      case "SUM":
+        return (agg, el) => agg + el;
+      case "MAX":
+        return (agg, el) => Math.max(agg, el);
+      case "MIN":
+        return (agg, el) => Math.min(agg ?? Infinity, el);
+      case "AVG":
+        return (agg, el) => {
+          let out = agg;
+          if (!Array.isArray(agg)) {
+            out = [[], undefined];
+          }
+          out[0].push(el);
+          return [
+            out[0],
+            () => out[0].reduce((acc, el) => acc + el) / out[0].length,
+          ];
+        };
+    }
+  }
+
   /**
    * @param {string} aggCol
    * @param {string} xCol
    * @param {string} yCol
+   * @param {string} operation
    */
-  pivot = (aggCol, xCol, yCol) => {
+  pivot = (aggCol, xCol, yCol, operation) => {
     let map = {};
     let rows = new Set();
     let cols = new Set();
+    let cb = this.#getOperationCb(operation);
     for (let el of this.table) {
       let k = serialize(el[xCol], el[yCol]);
       if (!(k in map)) {
-        map[k] = 0;
+        map[k] = null;
       }
-      map[k] += el[aggCol];
+      map[k] = cb(map[k], el[aggCol]);
       rows.add(el[xCol]);
       cols.add(el[yCol]);
     }
 
     const columns = Array.from(cols);
-    console.log([`Sum of ${aggCol.toLowerCase()}`, ...columns]);
+    console.log([`${operation} of ${aggCol.toLowerCase()}`, ...columns]);
     Array.from(rows).forEach((x) => {
       let data = columns.map((y) => {
         const key = serialize(x, y);
-        return map[key] ?? 0;
+        return typeof map[key] !== "object" ? map[key] ?? 0 : map[key][1]();
       });
       console.log([x, ...data]);
     });
+    console.log("----------------");
   };
 }
 
@@ -154,4 +180,7 @@ const data = [
 ];
 
 let s = new Sheet(data);
-s.pivot("Shirts sold", "Color", "Date");
+s.pivot("Shirts sold", "Color", "Date", "SUM");
+s.pivot("Shirts sold", "Color", "Date", "AVG");
+s.pivot("Shirts sold", "Color", "Date", "MIN");
+s.pivot("Shirts sold", "Color", "Date", "MAX");
