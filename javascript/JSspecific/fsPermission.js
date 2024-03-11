@@ -63,10 +63,10 @@ class FileSystem {
   };
 
   #dfs = (target, node, hasPerm, user) => {
-    if (!(node in this.fs)) {
-      // base case: at a leaf node
-      return false;
-    }
+    // if (!(node in this.fs)) {
+    //   // base case: at a leaf node
+    //   return false;
+    // }
     if (this.perms[user]?.has(node)) {
       hasPerm = true;
     }
