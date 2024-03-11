@@ -58,6 +58,15 @@ class Sheet {
             () => out[0].reduce((acc, el) => acc + el) / out[0].length,
           ];
         };
+      case "COUNTDISTINCT":
+        return (agg, el) => {
+          let out = agg;
+          if (!Array.isArray(agg)) {
+            out = [new Set(), undefined];
+          }
+          out[0].add(el);
+          return [out[0], () => out[0].size];
+        };
     }
   }
 
@@ -188,3 +197,4 @@ s.pivot("Shirts sold", "Store ID", "Date", "SUM");
 s.pivot("Shirts sold", "Store ID", "Color", "SUM");
 s.pivot("Shirts sold", "Store ID", "Color", "MAX");
 s.pivot("Shirts sold", "Store ID", "Color", "MIN");
+s.pivot("Color", "Store ID", "Date", "COUNTDISTINCT");

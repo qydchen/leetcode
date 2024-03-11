@@ -1,4 +1,4 @@
-var assert = require("assert");
+const assert = require("assert");
 // Basically, you need to define the required classes and parameters yourself and then complete the token parse
 
 // We'd like to parse a JSON string into a data structure that we can inspect and modify.
@@ -159,7 +159,7 @@ class Jason {
   };
 }
 
-let obj = {
+const obj = {
   a: 10,
   b: "foo",
   c: [null, true],
@@ -170,8 +170,8 @@ let obj = {
   },
 };
 
-let json = new Jason(obj);
-let expected = [
+const json = new Jason(obj);
+const expected = [
   { type: "start-object" },
   { type: "field-name", val: "a" },
   { type: "number", val: 10 },
@@ -196,8 +196,8 @@ let expected = [
 assert.deepStrictEqual(json.lex(), expected, "nested jsons should work");
 assert.deepStrictEqual(json.parse(), obj, "parsing nested tokens should work");
 
-let json1 = new Jason({ a: 10, b: "foo" });
-let expected1 = [
+const json1 = new Jason({ a: 10, b: "foo" });
+const expected1 = [
   { type: "start-object" },
   { type: "field-name", val: "a" },
   { type: "number", val: 10 },
@@ -212,8 +212,8 @@ assert.deepStrictEqual(
   "parsing simple case should work"
 );
 
-let json2 = new Jason({});
-let expected2 = [{ type: "start-object" }, { type: "end-object" }];
+const json2 = new Jason({});
+const expected2 = [{ type: "start-object" }, { type: "end-object" }];
 assert.deepStrictEqual(json2.lex(), expected2, "empty object case should work");
 assert.deepStrictEqual(json2.parse(), {}, "empty object case should work");
 
@@ -224,8 +224,8 @@ const obj3 = {
   d: null,
   f: {},
 };
-let json3 = new Jason(obj3);
-let expected3 = [
+const json3 = new Jason(obj3);
+const expected3 = [
   { type: "start-object" },
   { type: "field-name", val: "a" },
   { type: "number", val: 10 },
@@ -243,13 +243,13 @@ let expected3 = [
 assert.deepStrictEqual(json3.lex(), expected3);
 assert.deepStrictEqual(json3.parse(), obj3);
 
-let json4 = new Jason([]);
-let expected4 = [{ type: "start-array" }, { type: "end-array" }];
+const json4 = new Jason([]);
+const expected4 = [{ type: "start-array" }, { type: "end-array" }];
 assert.deepStrictEqual(json4.lex(), expected4, "empty array should work");
 assert.deepStrictEqual(json4.parse(), [], "empty array should work");
 
-let json5 = new Jason(["abc", null, false, 123]);
-let expected5 = [
+const json5 = new Jason(["abc", null, false, 123]);
+const expected5 = [
   { type: "start-array" },
   { type: "string", val: "abc" },
   { type: "null" },
@@ -260,9 +260,9 @@ let expected5 = [
 assert.deepStrictEqual(json5.lex(), expected5);
 assert.deepStrictEqual(json5.parse(), ["abc", null, false, 123]);
 
-let obj6 = ["abc", null, false, 123, obj];
-let json6 = new Jason(obj6);
-let expected6 = [
+const obj6 = ["abc", null, false, 123, obj];
+const json6 = new Jason(obj6);
+const expected6 = [
   { type: "start-array" },
   { type: "string", val: "abc" },
   { type: "null" },
@@ -300,18 +300,18 @@ assert.deepStrictEqual(
   "complex array case with object should work"
 );
 
-let json7 = new Jason("abc");
-let expected7 = [{ type: "string", val: "abc" }];
+const json7 = new Jason("abc");
+const expected7 = [{ type: "string", val: "abc" }];
 assert.deepStrictEqual(json7.lex(), expected7, "should work for scalar types");
 assert.deepStrictEqual(json7.parse(), "abc", "should work for scalar types");
 
-let json8 = new Jason(null);
-let expected8 = [{ type: "null" }];
+const json8 = new Jason(null);
+const expected8 = [{ type: "null" }];
 assert.deepStrictEqual(json8.lex(), expected8, "should work for null types");
 assert.deepStrictEqual(json8.parse(), null, "should work for null types");
 
-let json9 = new Jason([1, 2, 3, [4, 5, 6, [7, 8, 9], [false, true, null]]]);
-let expected9 = [
+const json9 = new Jason([1, 2, 3, [4, 5, 6, [7, 8, 9], [false, true, null]]]);
+const expected9 = [
   { type: "start-array" },
   { type: "number", val: 1 },
   { type: "number", val: 2 },
@@ -342,8 +342,8 @@ assert.deepStrictEqual(
 
 const obj10 = { a: { b: { c: {} } }, d: {} };
 
-let json10 = new Jason(obj10);
-let expected10 = [
+const json10 = new Jason(obj10);
+const expected10 = [
   { type: "start-object" },
   { type: "field-name", val: "a" },
   { type: "start-object" },
