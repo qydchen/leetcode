@@ -9,6 +9,14 @@ const assert = require("assert");
 // Follow-up:
 // Existing level classification, admin, edit, v‍‌‌‌‍‍‌‌‌‍‌‍‌‌‌‌‌‍‍‍iew, how to implement it.
 
+// type Filename = String;
+// enum AccessLevel {
+//   ADMIN,
+//   EDIT,
+//   VIEW,
+// }
+// type Permmission = Record<AccessLevel, Set<Filename>>
+
 class FileSystem {
   constructor() {
     this.root = "root";
@@ -76,31 +84,31 @@ class FileSystem {
     };
   }
 
-  grantPermission = (item, user) => {
+  grantPermission = (item, user, accessLevel = "VIEW") => {
     if (!(user in this.perms)) {
-      this.perms[user] = new Set();
+      this.perms[user] = { [accessLevel]: new Set() };
     }
-    this.perms[user].add(item);
+    this.perms[user][accessLevel].add(item);
   };
 
-  hasPermission = (item, user) => {
-    if (this.perms[user]?.has(item)) return true;
-    return this.#dfs(item, this.root, user, false);
+  hasPermission = (item, user, accessLevel = "VIEW") => {
+    if (this.perms[user]?.[accessLevel]?.has(item)) return true;
+    return this.#dfs(item, this.root, user, false, accessLevel);
   };
 
-  #dfs = (target, node, user, hasPerm) => {
+  #dfs = (target, node, user, hasPerm, accessLevel) => {
     // base case: at a leaf node and did not find target, then return false
     if (!(node in this.fs)) return false;
     // base case: at found target, return the hasPerm boolean passed from parent
     if (target === node) return hasPerm;
     // check if the current node has permission
     if (!hasPerm) {
-      hasPerm = this.perms[user]?.has(node) ?? false;
+      hasPerm = this.perms[user]?.[accessLevel]?.has(node) ?? false;
     }
-    // recursively check each fild
+    // recursively check each file
     for (const child of this.fs[node]) {
       // if node is found, return the eval'd output, if true, then it is a node with permission
-      const isFound = this.#dfs(target, child, user, hasPerm);
+      const isFound = this.#dfs(target, child, user, hasPerm, accessLevel);
       if (isFound) return isFound;
     }
     // searched the entire tree of this node and no output
@@ -199,3 +207,10 @@ assert.deepStrictEqual(
 
 assert.equal(fs.hasPermission("afps_hfs_convert", "joe"), false);
 assert.equal(fs.hasPermission("rpc", "joe"), true);
+
+fs.grantPermission("cat", "testuser123", "ADMIN");
+assert.equal(fs.hasPermission("cat", "testuser123", "ADMIN"), true);
+assert.equal(fs.hasPermission("cat", "testuser123", "VIEW"), false);
+assert.equal(fs.hasPermission("mkdir", "testuser123", "ADMIN"), false);
+fs.grantPermission("mkdir", "testuser123", "ADMIN");
+assert.equal(fs.hasPermission("mkdir", "testuser123", "ADMIN"), true);
