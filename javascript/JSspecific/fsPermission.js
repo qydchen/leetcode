@@ -46,6 +46,33 @@ class FileSystem {
         "cat",
       ],
       var: ["backups", "empty", "lib"],
+      rpc: [],
+      paths: [],
+      hosts: [],
+      group: [],
+      gettytab: [],
+      zshrc: [],
+      "syslog.conf": [],
+      "pf.os": [],
+      "pfcount2045.natd": [],
+      "perfname2045.natd": [],
+      backups: [],
+      empty: [],
+      lib: [],
+      chmod: [],
+      rm: [],
+      rmdir: [],
+      zsh: [],
+      cp: [],
+      date: [],
+      kill: [],
+      mkdir: [],
+      cat: [],
+      apfs_hfs_convert: [],
+      fsck_apfs: [],
+      fstyp_hfs: [],
+      disklabel: [],
+      fsck_exfat: [],
     };
   }
 
@@ -58,24 +85,26 @@ class FileSystem {
 
   hasPermission = (item, user) => {
     if (this.perms[user]?.has(item)) return true;
-    const hasPerm = this.#dfs(item, this.root, false, user);
-    return hasPerm;
+    return this.#dfs(item, this.root, user, false);
   };
 
-  #dfs = (target, node, hasPerm, user) => {
-    if (this.perms[user]?.has(node)) {
-      hasPerm = true;
+  #dfs = (target, node, user, hasPerm) => {
+    // base case: at a leaf node and did not find target, then return false
+    if (!(node in this.fs)) return false;
+    // base case: at found target, return the hasPerm boolean passed from parent
+    if (target === node) return hasPerm;
+    // check if the current node has permission
+    if (!hasPerm) {
+      hasPerm = this.perms[user]?.has(node) ?? false;
     }
-    if (target === node) {
-      // if target is found, the topdown recursion should keep track of if parent has perm
-      return hasPerm;
+    // recursively check each fild
+    for (const child of this.fs[node]) {
+      // if node is found, return the eval'd output, if true, then it is a node with permission
+      const isFound = this.#dfs(target, child, user, hasPerm);
+      if (isFound) return isFound;
     }
-
-    for (let child of this.fs[node]) {
-      let found = this.#dfs(target, child, hasPerm, user);
-      if (found) return found;
-    }
-    return hasPerm;
+    // searched the entire tree of this node and no output
+    return false;
   };
 }
 
@@ -149,3 +178,24 @@ assert.deepStrictEqual(
   }),
   new Array(9).fill(false)
 );
+
+fs.grantPermission("etc", "joe");
+assert.deepStrictEqual(
+  [
+    "apfs_hfs_convert",
+    "fsck_apfs",
+    "fstyp_hfs",
+    "disklabel",
+    "fsck_exfat",
+    "rpc",
+    "paths",
+    "hosts",
+    "group",
+  ].map((file) => {
+    return fs.hasPermission(file, "joe");
+  }),
+  new Array(5).fill(false).concat(new Array(4).fill(true))
+);
+
+assert.equal(fs.hasPermission("afps_hfs_convert", "joe"), false);
+assert.equal(fs.hasPermission("rpc", "joe"), true);
