@@ -63,10 +63,6 @@ class FileSystem {
   };
 
   #dfs = (target, node, hasPerm, user) => {
-    // if (!(node in this.fs)) {
-    //   // base case: at a leaf node
-    //   return false;
-    // }
     if (this.perms[user]?.has(node)) {
       hasPerm = true;
     }
@@ -134,4 +130,22 @@ assert.deepStrictEqual(
     return fs.hasPermission(file, "rootusr");
   }),
   new Array(9).fill(true)
+);
+
+fs.grantPermission("asdf", "joe");
+assert.deepStrictEqual(
+  [
+    "apfs_hfs_convert",
+    "fsck_apfs",
+    "fstyp_hfs",
+    "disklabel",
+    "fsck_exfat",
+    "pfcount2045.natd",
+    "root",
+    "etc",
+    "tmp",
+  ].map((file) => {
+    return fs.hasPermission(file, "joe");
+  }),
+  new Array(9).fill(false)
 );
