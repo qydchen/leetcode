@@ -15,7 +15,7 @@ const assert = require("assert");
 //   EDIT,
 //   VIEW,
 // }
-// type Permmission = Record<AccessLevel, Set<Filename>>
+// type Permission = Record<AccessLevel, Set<Filename>>
 
 class FileSystem {
   constructor() {

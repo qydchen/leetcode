@@ -74,18 +74,14 @@ class Jason {
     let out = null;
     for (let token of tokens) {
       if (token.type === "start-object") {
+        stack.push({});
         if (!out) {
-          out = {};
-          stack.push(out);
-        } else {
-          stack.push({});
+          out = stack.at(-1);
         }
       } else if (token.type === "start-array") {
+        stack.push([]);
         if (!out) {
-          out = [];
-          stack.push(out);
-        } else {
-          stack.push([]);
+          out = stack.at(-1);
         }
       } else if (token.type.includes("end")) {
         const token1 = stack.pop();

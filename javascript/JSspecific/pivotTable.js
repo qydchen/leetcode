@@ -67,6 +67,15 @@ class Sheet {
           out[0].add(el);
           return [out[0], () => out[0].size];
         };
+      case "SUMPRODUCT":
+        return (agg, el, ...otherEls) => {
+          let out = agg;
+          if (!Array.isArray(agg)) {
+            out = [[], undefined];
+          }
+          out[0].push(el * otherEls.reduce((acc, el) => acc * el));
+          return [out[0], () => out[0].reduce((a, c) => a + c)];
+        };
     }
   }
 
@@ -76,7 +85,7 @@ class Sheet {
    * @param {string} yCol
    * @param {string} operation
    */
-  pivot = (aggCol, xCol, yCol, operation = "SUM") => {
+  pivot = (aggCol, xCol, yCol, operation = "SUM", ...otherCols) => {
     let map = {};
     let rows = new Set();
     let cols = new Set();
@@ -86,7 +95,7 @@ class Sheet {
       if (!(k in map)) {
         map[k] = null;
       }
-      map[k] = cb(map[k], el[aggCol]);
+      map[k] = cb(map[k], el[aggCol], ...otherCols.map((c) => el[c]));
       rows.add(el[xCol]);
       cols.add(el[yCol]);
     }
@@ -115,6 +124,8 @@ const data = [
     Color: "red",
     Size: "XS",
     "Shirts sold": 1,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "abcd1234",
@@ -122,6 +133,8 @@ const data = [
     Color: "blue",
     Size: "L",
     "Shirts sold": 20,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "abcd1234",
@@ -129,6 +142,8 @@ const data = [
     Color: "green",
     Size: "M",
     "Shirts sold": 300,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "abcd1234",
@@ -136,6 +151,8 @@ const data = [
     Color: "red",
     Size: "XS",
     "Shirts sold": 4,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "abcd1234",
@@ -143,6 +160,8 @@ const data = [
     Color: "black",
     Size: "S",
     "Shirts sold": 50,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "5678wxyz",
@@ -150,6 +169,8 @@ const data = [
     Color: "blue",
     Size: "XL",
     "Shirts sold": 600,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "5678wxyz",
@@ -157,6 +178,8 @@ const data = [
     Color: "green",
     Size: "M",
     "Shirts sold": 7,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "5678wxyz",
@@ -164,6 +187,8 @@ const data = [
     Color: "black",
     Size: "L",
     "Shirts sold": 80,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "5678wxyz",
@@ -171,6 +196,8 @@ const data = [
     Color: "blue",
     Size: "S",
     "Shirts sold": 900,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "e1f9g2h8",
@@ -178,6 +205,8 @@ const data = [
     Color: "red",
     Size: "S",
     "Shirts sold": 1,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
   {
     "Store ID": "e1f9g2h8",
@@ -185,6 +214,8 @@ const data = [
     Color: "black",
     Size: "M",
     "Shirts sold": 20,
+    "Price per shirt": 20,
+    TaxAdjustmentMultiplier: 1.0875,
   },
 ];
 
@@ -198,3 +229,12 @@ s.pivot("Shirts sold", "Store ID", "Color", "SUM");
 s.pivot("Shirts sold", "Store ID", "Color", "MAX");
 s.pivot("Shirts sold", "Store ID", "Color", "MIN");
 s.pivot("Color", "Store ID", "Date", "COUNTDISTINCT");
+s.pivot("Shirts sold", "Color", "Date", "SUMPRODUCT", "Price per shirt");
+s.pivot(
+  "Shirts sold",
+  "Color",
+  "Date",
+  "SUMPRODUCT",
+  "Price per shirt",
+  "TaxAdjustmentMultiplier"
+);
