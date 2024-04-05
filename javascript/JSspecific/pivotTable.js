@@ -68,12 +68,12 @@ class Sheet {
           return [out[0], () => out[0].size];
         };
       case "SUMPRODUCT":
-        return (agg, el, ...otherEls) => {
+        return (agg, el, ...cols) => {
           let out = agg;
           if (!Array.isArray(agg)) {
             out = [[], undefined];
           }
-          out[0].push(el * otherEls.reduce((acc, el) => acc * el));
+          out[0].push(el * cols.reduce((acc, el) => acc * el));
           return [out[0], () => out[0].reduce((a, c) => a + c)];
         };
     }
@@ -85,23 +85,28 @@ class Sheet {
    * @param {string} yCol
    * @param {string} operation
    */
-  pivot = (aggCol, xCol, yCol, operation = "SUM", ...otherCols) => {
+  pivot = (aggCol, xCol, yCol, operation = "SUM", ...otherArgs) => {
     let map = {};
-    let rows = new Set();
-    let cols = new Set();
+    let rows = new Set(); // used to generate unique set of rows
+    let cols = new Set(); // used to generate unique set of cols
     let cb = this.#getOperationCb(operation);
     for (let el of this.table) {
       let k = serialize(el[xCol], el[yCol]);
       if (!(k in map)) {
         map[k] = null;
       }
-      map[k] = cb(map[k], el[aggCol], ...otherCols.map((c) => el[c]));
+      // map the computation to the key k
+      map[k] = cb(map[k], el[aggCol], ...otherArgs.map((c) => el[c]));
+      // add rows and cols
       rows.add(el[xCol]);
       cols.add(el[yCol]);
     }
 
     const columns = Array.from(cols);
+    // print first line
     console.log([`${operation} of ${aggCol.toLowerCase()}`, ...columns]);
+
+    // for each row, go through each column and display the value by accessing map
     Array.from(rows).forEach((x) => {
       let data = columns.map((y) => {
         const key = serialize(x, y);

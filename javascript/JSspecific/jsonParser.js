@@ -71,6 +71,7 @@ class Jason {
 
   #parse = (tokens) => {
     const stack = [];
+    // the root return value
     let out = null;
     for (let token of tokens) {
       if (token.type === "start-object") {
@@ -112,9 +113,7 @@ class Jason {
     return out;
   };
 
-  lex = () => {
-    return [...this.#lex(this.json)];
-  };
+  lex = () => this.#lex(this.json);
 
   #lex = (data) => {
     let out = [];
