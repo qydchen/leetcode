@@ -1,15 +1,14 @@
-// Given a sorted array, remove the duplicates in-place such that each
-// element appear only once and return the new length.
-
-// O(n) time where n is the length of the array,
-// O(1) space
-const removeDuplicates = function(nums) {
-  let i = 0;
-  for (let j = 0; j < nums.length; j++) {
-    if (nums[j] !== nums[i]) {
-      i++;
-      nums[i] = nums[j];
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function (nums) {
+  let uniq = 0;
+  for (let curr = 1; curr < nums.length; curr++) {
+    if (nums[curr] !== nums[uniq]) {
+      uniq++;
+      [nums[uniq], nums[curr]] = [nums[curr], nums[uniq]];
     }
   }
-  return i + 1;
+  return uniq + 1;
 };
