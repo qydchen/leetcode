@@ -1,5 +1,9 @@
+// functions can only be run at a limit number of times
 function runwithConcurrencyLimit(fns, limit, successCb) {
   const results = [];
+  if (fns.length === 0) {
+    successCb(results);
+  }
   let active = 0;
   let idx = 0;
   let done = 0;
@@ -10,8 +14,7 @@ function runwithConcurrencyLimit(fns, limit, successCb) {
       const fn = fns[idx];
       idx++;
       if (fn !== undefined) {
-        fn(r => {
-          console.log(r);
+        fn((r) => {
           results.push(r);
           done++;
           active--;
@@ -27,14 +30,4 @@ function runwithConcurrencyLimit(fns, limit, successCb) {
   next();
 }
 
-const fns = [
-  (cb) => setTimeout(() => cb(100), 2000),
-  (cb) => setTimeout(() => cb(200), 1000),
-  (cb) => setTimeout(() => cb(300), 2000),
-  (cb) => setTimeout(() => cb(400), 1500),
-  (cb) => setTimeout(() => cb(500), 1000),
-];
-
-runwithConcurrencyLimit(fns, 2, (results) => {
-  console.log(results);
-});
+module.exports = runwithConcurrencyLimit;
